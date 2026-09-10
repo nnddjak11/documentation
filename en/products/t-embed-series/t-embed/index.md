@@ -9,6 +9,8 @@ tags: ESP32-S3, TFT, Rotary Encoder, APA102, Speaker, MicroSD, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-embed-series/t-embed/index/image/t-embed-1.jpg', alt: 'T-Embed front view' },
   { src: '/products/t-embed-series/t-embed/index/image/t-embed-2.jpg', alt: 'T-Embed back view' },
+  { src: '/products/t-embed-series/t-embed/index/image/t-embed-3.jpg', alt: 'T-Embed dimensions' },
+  { src: '/products/t-embed-series/t-embed/index/image/t-embed-info.jpg', alt: 'T-Embed specifications' },
 ]" />
 
 ## Overview
@@ -93,9 +95,11 @@ LILYGO T-Embed is a multi-functional ESP32-S3 development platform featuring a *
 | Expansion | 2 × QWIIC |
 | Dimensions | 95.4 × 36.4 mm |
 
+![T-Embed Specifications](/products/t-embed-series/t-embed/index/image/t-embed-info.jpg)
+
 ## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T-Embed Pinout](/products/t-embed-series/t-embed/index/image/t-embed-pinout.jpg)
 
 ## Dimensions
 
@@ -103,13 +107,13 @@ LILYGO T-Embed is a multi-functional ESP32-S3 development platform featuring a *
 
 ## Schematic
 
-- [T-Embed GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/T-Embed/tree/master/hardware)
+- [T-Embed GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/T-Embed/tree/main/schematic)
 
 ## Datasheet
 
-- [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [ST7789V Datasheet](https://www.newhavendisplay.com/appnotes/datasheets/LCDs/ST7789V.pdf)
-- [MAX98357A Datasheet](https://www.maximintegrated.com/en/products/analog/audio/MAX98357A.html)
+- [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+- [ST7789V Datasheet](/datasheet/ST7789V.pdf)
+- [MAX98357A Datasheet](/datasheet/max98357a-max98357b.pdf)
 
 ## Software Libraries
 
@@ -117,7 +121,6 @@ LILYGO T-Embed is a multi-functional ESP32-S3 development platform featuring a *
 
 ### Dependent Libraries
 
-- [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 - [FastLED](https://github.com/FastLED/FastLED)
 - [ESP32-audioI2S](https://github.com/schreibfaul1/ESP32-audioI2S)
 - [LVGL](https://github.com/lvgl/lvgl)

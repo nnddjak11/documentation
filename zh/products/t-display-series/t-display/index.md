@@ -8,7 +8,6 @@ tags: ESP32, ST7789V, TFT, Wi-Fi, Bluetooth, IoT
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display/index/image/t-display-1.jpg', alt: 'T-Display 正面' },
-  { src: '/products/t-display-series/t-display/index/image/t-display-2.jpg', alt: 'T-Display 背面' },
 ]" />
 
 ## 概述
@@ -21,7 +20,7 @@ LILYGO T-Display 是一款集成 **1.14 英寸 ST7789V IPS TFT LCD**（240 × 13
 
 | 示例 | PlatformIO/Arduino | ESP-IDF | 描述 |
 | :-----: | :----------------: | :-----: | :---------: |
-| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | 显示屏演示、TFT_eSPI 示例、出厂测试 |
+| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | 显示屏演示、示例、出厂测试 |
 
 ### PlatformIO
 
@@ -80,13 +79,15 @@ LILYGO T-Display 是一款集成 **1.14 英寸 ST7789V IPS TFT LCD**（240 × 13
 | 显示屏 | 1.14 英寸 ST7789V IPS TFT，240 × 135 像素 |
 | 显示接口 | 4 线 SPI |
 | 按键 | 2 × 可编程按键 |
-| 电池 | JST-PH 1.25mm 接口，支持 1S LiPo |
+| 电池 | JST-GH 1.25mm 接口，支持 1S LiPo |
 | USB | 1 × USB-C |
 | 工作电压 | 2.7 V – 4.2 V |
 
+![T-Display 规格参数](/products/t-display-series/t-display/index/image/t-display-info.jpg)
+
 ## 引脚图
 
-<!-- GPIO 映射关系表。 -->
+![T-Display 引脚图](/products/t-display-series/t-display/index/image/t-display-pinout.jpg)
 
 ### 显示屏 (ST7789V)
 
@@ -119,7 +120,6 @@ LILYGO T-Display 是一款集成 **1.14 英寸 ST7789V IPS TFT LCD**（240 × 13
 
 ### 依赖库
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 
 ## 常见问题
 

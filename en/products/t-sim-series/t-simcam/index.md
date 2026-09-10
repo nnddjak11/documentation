@@ -9,6 +9,8 @@ tags: ESP32-S3, Camera, OV2640, SIM, mPCIe, Cellular, 4G, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-1.jpg', alt: 'T-SIMCam front view' },
   { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-2.jpg', alt: 'T-SIMCam back view' },
+  { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-3.jpg', alt: 'T-SIMCam dimensions' },
+  { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-info.jpg', alt: 'T-SIMCam specifications' },
 ]" />
 
 ## Overview
@@ -21,7 +23,7 @@ LILYGO T-SIMCam is an all-in-one ESP32-S3 camera and cellular IoT board combinin
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
 | :-----: | :----------------: | :-----: | :---------: |
-| [T-SIMCam](https://github.com/Xinyuan-LilyGO/T-SIMCam) | ✓ | | Camera capture, cellular upload, MQTT examples |
+| [T-SIMCam](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series) | ✓ | | Camera capture, cellular upload, MQTT examples |
 
 ### PlatformIO
 
@@ -88,6 +90,8 @@ LILYGO T-SIMCam is an all-in-one ESP32-S3 camera and cellular IoT board combinin
 | USB | 1 × USB-C |
 | Battery | 3.7 V Li-Po connector |
 
+![T-SIMCam Specifications](/products/t-sim-series/t-simcam/index/image/t-simcam-info.jpg)
+
 ## Pin Diagram
 
 ### Camera (OV2640, DVP)
@@ -118,16 +122,16 @@ LILYGO T-SIMCam is an all-in-one ESP32-S3 camera and cellular IoT board combinin
 
 ## Schematic
 
-- [T-SIMCam GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/T-SIMCam/tree/master/hardware)
+- [T-SIMCam GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series/tree/master/schematic)
 
 ## Datasheet
 
-- [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [OV2640 Datasheet](https://www.ov.com/full/product/OV2640.html)
+- [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+- [OV2640 Datasheet](/datasheet/OV2640-DATASHEET.pdf)
 
 ## Software Libraries
 
-- [T-SIMCam GitHub Repository](https://github.com/Xinyuan-LilyGO/T-SIMCam)
+- [T-SIMCam GitHub Repository](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series)
 
 ### Dependent Libraries
 

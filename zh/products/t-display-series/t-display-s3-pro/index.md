@@ -1,7 +1,7 @@
 ---
 title: LILYGO T-Display S3 Pro
 show_source: false
-tags: ESP32-S3, AMOLED, TFT_eSPI, USB OTG, IPS, Capacitive Touch
+tags: ESP32-S3, AMOLED, USB OTG, IPS, Capacitive Touch
 ---
 
 # {{ $frontmatter.title }} <ShopLink href="https://www.lilygo.cc/products/t-display-s3-pro" />
@@ -24,13 +24,13 @@ tags: ESP32-S3, AMOLED, TFT_eSPI, USB OTG, IPS, Capacitive Touch
 
 | 示例 | PlatformIO/Arduino | ESP-IDF | 描述 |
 | :------ | :----------------: | :-----: | :---------- |
-| [Factory](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/factory) | ✓ | | 出厂综合测试 |
-| [TFT_eSPI_Simple](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/TFT_eSPI_Simple) | ✓ | | TFT_eSPI 绘图基础 |
-| [AdjustBacklight](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/AdjustBacklight) | ✓ | | 背光调节（区分 V1.0/V1.1） |
-| [PMU_Example](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/PMU_Example) | ✓ | | 电源管理配置与电池信息 |
-| [USB_HID_Example](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/USB_HID_Example) | ✓ | | USB HID 和 OTG 功能 |
-| [CameraShield](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/CameraShield) | ✓ | | 摄像头扩展板使用 |
-| [Cellphone](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples/Cellphone) | ✓ | | 拍照及相册（需 TF 卡） |
+| [Factory](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/factory) | ✓ | | 出厂综合测试 |
+| [Display_Example](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/examples) | ✓ | | Arduino_GFX 显示绘图基础 |
+| [AdjustBacklight](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/AdjustBacklight) | ✓ | | 背光调节（区分 V1.0/V1.1） |
+| [PMU_Example](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/PMU_Example) | ✓ | | 电源管理配置与电池信息 |
+| [USB_HID_Example](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/USB_HID_Example) | ✓ | | USB HID 和 OTG 功能 |
+| [CameraShield](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/CameraShield) | ✓ | | 摄像头扩展板使用 |
+| [Cellphone](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/examples/Cellphone) | ✓ | | 拍照及相册（需 TF 卡） |
 
 ### PlatformIO
 
@@ -96,6 +96,21 @@ tags: ESP32-S3, AMOLED, TFT_eSPI, USB OTG, IPS, Capacitive Touch
 | 安装孔 | 4 × 2mm 定位孔 |
 | 尺寸 | 56.5 × 56.5 × 9.6mm |
 
+## 电气参数
+
+| 项目 | 参数 |
+| :-- | :-- |
+| USB-C 输入电压 | 3.9 V - 6 V |
+| USB-C 输出电压 | 4.55 V - 5.55 V |
+| USB-C 输出电流 | 0.5 A - 1 A |
+| 充电电流 | 0 - 5056 mA（可编程） |
+| 电池电压 | 3840 - 4608 mV（可编程） |
+| 电池容量 | 3800 mV / 470 mAh |
+| 电池接口 | ACHL 1.2 mm 接口 |
+| 充电温度 | 0 - 60°C |
+
+> 推荐充电电流：**< 200 mA**。充电电流不应超过电池容量的一半。未连接电池时，请关闭充电功能以保持供电稳定。
+
 ## 引脚图
 
 <img src="/products/t-display-series/t-display-s3-pro/index/image/t-display-s3 pro-pin.jpg" alt="T-Display S3 Pro 引脚图（正面）" width=100%>
@@ -106,13 +121,13 @@ tags: ESP32-S3, AMOLED, TFT_eSPI, USB OTG, IPS, Capacitive Touch
 
 ## 原理图
 
-* [T-Display-S3-Pro 原理图](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/blob/main/schematic/T-Display-S3-Pro.pdf)
-* [T-Display-S3-Pro 背板设计文件](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/main/dimensions/BackCover)
+* [T-Display-S3-Pro 原理图](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/blob/master/schematic/T-Display-Pro.pdf)
+* [T-Display-S3-Pro 背板设计文件](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/tree/master/dimensions/BackCover)
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SY6970 Datasheet](https://www.semtech.com/products/analog-front-end/sy6970)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SY6970 Datasheet](/datasheet/AN_SY6970.pdf)
 
 ## 软件开发
 
@@ -122,7 +137,6 @@ tags: ESP32-S3, AMOLED, TFT_eSPI, USB OTG, IPS, Capacitive Touch
 
 ### 依赖库
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [Arduino_GFX](https://github.com/moononournation/Arduino_GFX)
 * [XPowersLib](https://github.com/lewisxhe/XPowersLib)
 * [SensorLib](https://github.com/lewisxhe/SensorLib)

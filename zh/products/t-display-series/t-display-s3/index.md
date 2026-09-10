@@ -4,7 +4,7 @@ show_source: false
 tags: ESP32-S3R8, WIFI, BLE, LCD
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-display-s3?variant=42589373268149" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-display-s3" />
 
 
 
@@ -158,11 +158,11 @@ T-Display-S3 是一款主控芯片为 ESP32-S3 的开发板。它配备了一块
 *   [T-Display-S3 原理图 (PDF)](https://github.com/Xinyuan-LilyGO/T-Display-S3/blob/main/schematic/T_Display_S3.pdf)
 
 ##  数据手册
-*   [ESP32-S3 数据手册](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+*   [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en.pdf)
 
 
 ##  软件开发
-*   **GitHub 仓库**：[T-Display-S3 GitHub Repository](https://https://github.com/Xinyuan-LilyGO/T-Display-S3/tree/main)
+*   **GitHub 仓库**：[T-Display-S3 GitHub Repository](https://github.com/Xinyuan-LilyGO/T-Display-S3/tree/main)
 
 ### 依赖库
 *   [lvgl](https://github.com/lvgl/lvgl)

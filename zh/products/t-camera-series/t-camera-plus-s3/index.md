@@ -106,6 +106,14 @@ T-CameraPlus-S3是一款基于ESP32-S3主控芯片的多功能智能硬件开发
 | 固定孔 | 4 × 2mm 定位孔 |
 | 尺寸 | 60 × 32 × 12mm |
 
+## 功耗参考
+
+| 硬件版本 | 模式 / 测试固件 | 电流 |
+| :-- | :-- | :-- |
+| T-CameraPlus-S3 V1.2 | 深度睡眠 / `Deep_Sleep_Wake_Up` | 平均 1.7 mA |
+
+> 该结果仅适用于官方测试条件下的 V1.2，详见[功耗测试报告](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/relevant_test/PowerConsumptionTestLog_%5BT-CameraPlus-S3_V1.2%5D_20250408.pdf)。其他硬件版本、摄像头模组及固件配置的结果可能不同。
+
 ## 引脚图
 
 <img src="/products/t-camera-series/t-camera-plus-s3/index/image/t-cameraplus-s3-pin-zh.jpg" alt="T-Camera Plus S3 引脚图" width=100%>
@@ -140,7 +148,7 @@ T-CameraPlus-S3是一款基于ESP32-S3主控芯片的多功能智能硬件开发
 | MOSI | IO35 |
 | MISO | IO37 |
 
-| 电源芯片 SY6970 | ESP32S3 引脚 |
+| 电源芯片 SY6970(0x6A) | ESP32S3 引脚 |
 | :----: | :----: |
 | SDA | IO1 |
 | SCL | IO2 |
@@ -199,7 +207,7 @@ T-CameraPlus-S3是一款基于ESP32-S3主控芯片的多功能智能硬件开发
 | MOSI | IO34 |
 | MISO | IO48 |
 
-| 电源芯片 SY6970 | ESP32S3 引脚 |
+| 电源芯片 SY6970(0x6A) | ESP32S3 引脚 |
 | :----: | :----: |
 | SDA | IO33 |
 | SCL | IO37 |
@@ -237,15 +245,15 @@ T-CameraPlus-S3是一款基于ESP32-S3主控芯片的多功能智能硬件开发
 
 ## 原理图
 
-* [T-CameraPlus-S3_V1.0-V1.1](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/project/T-CameraPlus-S3_V1.0-V1.1_20241109.pdf)
-* [T-CameraPlus-S3_V1.2](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/project/T-CameraPlus-S3_V1.2_20240417.pdf)
+* [T-CameraPlus-S3_V1.0-V1.1](/products/t-camera-series/t-camera-plus-s3/index/hardware/T-CameraPlus-S3_V1.0-V1.1_20241109.pdf)
+* [T-CameraPlus-S3_V1.2](/products/t-camera-series/t-camera-plus-s3/index/hardware/T-CameraPlus-S3_V1.2_20240417.pdf)
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [MAX98357A Datasheet](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/information/MAX98357AETE+T.pdf)
-* [MP34DT05-A Datasheet](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/information/mp34dt05-a.pdf)
-* [SY6970 Datasheet](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/blob/arduino-esp32-libs_V2.0.14/information/EVB_SY6970.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [MAX98357A Datasheet](/datasheet/MAX98357AETE+T.pdf)
+* [MP34DT05-A Datasheet](/datasheet/mp34dt05-a.pdf)
+* [SY6970 Datasheet](/datasheet/EVB_SY6970.pdf)
 
 ## 软件开发
 
@@ -259,7 +267,7 @@ T-CameraPlus-S3是一款基于ESP32-S3主控芯片的多功能智能硬件开发
 * [MiniTV](https://github.com/moononournation/MiniTV)
 * [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [XPowersLib-0.2.1](https://github.com/lewisxhe/XPowersLib)
-* [Arduino_DriveBus-1.1.16](https://github.com/Xk-w/Arduino_DriveBus)
+* [Arduino_DriveBus-1.1.16](https://github.com/Llgok/Arduino_DriveBus)
 * [cst816t-1.5.0](https://github.com/koendv/cst816t)
 * [arduino-libhelix-0.8.1](https://github.com/pschatzmann/arduino-libhelix)
 * [ESP32-audioI2S-3.0.6](https://github.com/schreibfaul1/ESP32-audioI2S)

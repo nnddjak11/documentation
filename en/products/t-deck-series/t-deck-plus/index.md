@@ -1,7 +1,7 @@
 ---
 title: T-Deck Plus
 show_source: false
-tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard
+tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard, Touch
 ---
 
 # {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-deck" />
@@ -13,11 +13,13 @@ tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard
 
 ## Overview
 
-LILYGO T-Deck Plus is a highly integrated multi-functional embedded development platform based on the **ESP32-S3** chip. It integrates a **2.8-inch ST7789 LCD** (320 × 240), **trackball navigation module**, **physical keyboard** (I²C), **TF card**, **LoRa SX1262** wireless module, and **ES7210 microphone array**. Compared to the standard T-Deck, T-Deck Plus adds a **GPS module** (MIA-M10Q) with the Grove interface pins repurposed for GPS — the Grove interface is not available as a general-purpose connector on T-Deck Plus.
+LILYGO T-Deck Plus is a highly integrated multi-functional embedded development platform based on the **ESP32-S3** chip. It integrates a **2.8-inch ST7789 LCD** (320 × 240) with **GT911 capacitive touch**, **trackball navigation module**, **physical keyboard** (I²C), **TF card**, **LoRa SX1262** wireless module, and **ES7210 microphone array**. Compared to the standard T-Deck, T-Deck Plus adds a **GPS module** (MIA-M10Q) with the Grove interface pins repurposed for GPS — the Grove interface is not available as a general-purpose connector on T-Deck Plus.
 
 > **Notes:**
-> 1. The **Grove** interface pins on T-Deck Plus are allocated to the GPS module and cannot be used as a general-purpose interface.
+> 1. The **Grove** interface pins on T-Deck Plus are allocated to the GPS module and cannot be used as a general-purpose interface. T-Deck Plus has a GT911 capacitive touchscreen; the standard T-Deck has no touchscreen and uses trackball navigation.
 > 2. T-Deck updated the [TFT_eSPI ST7789 initialization sequence](https://github.com/Xinyuan-LilyGO/T-Deck/commit/6adb8884c689f174c29a6d7172a0daa367a582eb) on 2024-07-26. If screen display is incorrect, check whether the initialization sequence in the repo matches.
+> 3. The LoRa radio module shares the SPI bus with other peripherals. Only one SPI device can be selected at a time — ensure all other SPI device CS lines are high (inactive) before communicating with the SX1262.
+> 4. When powered by battery, **GPIO10 must be set HIGH**. This requirement can be ignored when the board is powered via USB.
 
 ## Quick Start
 
@@ -86,7 +88,7 @@ examples
 - ESP32-S3FN16R8 dual-core LX7 @ 240 MHz, Wi-Fi + Bluetooth 5.0 LE
 - SX1262 LoRa (433–915 MHz, optional)
 - MIA-M10Q GNSS module (GPS, added vs. standard T-Deck)
-- 2.8-inch ST7789 LCD (320 × 240), trackball navigation (no touch screen)
+- 2.8-inch ST7789 LCD (320 × 240), GT911 capacitive touch, trackball navigation
 - Physical keyboard (I²C)
 - ES7210 audio codec + MSM381A3729H9CP microphone array
 - 2000 mAh lithium polymer battery
@@ -104,7 +106,8 @@ examples
 | LoRa | SX1262, 433–915 MHz (optional) |
 | GPS | MIA-M10Q GNSS |
 | Display | 2.8-inch ST7789 LCD, 320 × 240 |
-| Input | Trackball + physical keyboard (I²C) |
+| Touch | GT911 capacitive touch, I²C, INT=GPIO16 |
+| Input | Touchscreen + trackball + physical keyboard (I²C) |
 | Audio | ES7210 codec + microphone array |
 | Battery | 2000 mAh lithium polymer |
 | Storage | TF card expansion |
@@ -151,6 +154,196 @@ examples
 | GPS TX | 43 |
 | GPS RX | 44 |
 
+## Peripheral Initialization
+
+The following snippets show the minimum setup for each peripheral using the pin definitions above. Copy the `#define` block from [Pin Mapping](#pin-mapping) into your sketch, then use the relevant snippet.
+
+> **Before any SPI transaction** — pull all other CS lines HIGH first:
+> ```cpp
+> digitalWrite(BOARD_SDCARD_CS, HIGH);
+> digitalWrite(BOARD_TFT_CS,    HIGH);
+> digitalWrite(RADIO_CS_PIN,    HIGH);
+> ```
+
+### Power Enable (battery-powered builds)
+
+```cpp
+// Must be set HIGH when running on battery; safe to call on USB too.
+pinMode(BOARD_POWERON, OUTPUT);
+digitalWrite(BOARD_POWERON, HIGH);
+```
+
+### Display (ST7789 — Arduino_GFX)
+
+```cpp
+#include <Arduino_GFX_Library.h>
+
+Arduino_DataBus *bus = new Arduino_ESP32SPI(
+    BOARD_TFT_DC, BOARD_TFT_CS,
+    BOARD_SPI_SCK, BOARD_SPI_MOSI, BOARD_SPI_MISO);
+
+Arduino_GFX *gfx = new Arduino_ST7789(bus, -1, 0, true, 320, 240);
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    gfx->begin();
+    gfx->fillScreen(BLACK);
+}
+```
+
+### Display (ST7789 — TFT_eSPI)
+
+> Requires `User_Setup.h` configured for T-Deck — see the [2024-07-26 commit](https://github.com/Xinyuan-LilyGO/T-Deck/commit/6adb8884c689f174c29a6d7172a0daa367a582eb) for the correct initialization sequence.
+
+```cpp
+#include <TFT_eSPI.h>
+
+TFT_eSPI tft;
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    tft.init();
+    tft.setRotation(1);
+    tft.fillScreen(TFT_BLACK);
+}
+```
+
+### LoRa (SX1262 — RadioLib)
+
+```cpp
+#include <SPI.h>
+#include <RadioLib.h>
+
+SX1262 radio = new Module(
+    RADIO_CS_PIN,   // CS
+    RADIO_DIO1_PIN, // DIO1 / IRQ
+    RADIO_RST_PIN,  // RST
+    RADIO_BUSY_PIN  // BUSY
+);
+
+void setup() {
+    pinMode(BOARD_POWERON, OUTPUT); digitalWrite(BOARD_POWERON, HIGH);
+    delay(200);
+
+    pinMode(BOARD_SDCARD_CS, OUTPUT); digitalWrite(BOARD_SDCARD_CS, HIGH);
+    pinMode(BOARD_TFT_CS,    OUTPUT); digitalWrite(BOARD_TFT_CS,    HIGH);
+    pinMode(RADIO_CS_PIN,    OUTPUT); digitalWrite(RADIO_CS_PIN,    HIGH);
+
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI, RADIO_CS_PIN);
+
+    // frequency (MHz), bandwidth (kHz), spreading factor, coding rate, sync word, output power (dBm)
+    int state = radio.begin(915.0, 125.0, 7, 5, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22);
+    if (state != RADIOLIB_ERR_NONE) {
+        Serial.printf("LoRa init failed: %d\n", state);
+    }
+}
+```
+
+### GPS (MIA-M10Q — TinyGPSPlus)
+
+> T-Deck Plus only. The Grove interface pins are repurposed for GPS — Grove cannot be used as a general-purpose connector.
+
+```cpp
+#include <TinyGPSPlus.h>
+
+TinyGPSPlus gps;
+
+void setup() {
+    // GPS communicates over UART (Serial1 on ESP32-S3)
+    Serial1.begin(9600, SERIAL_8N1, BOARD_GPS_TX_PIN, BOARD_GPS_RX_PIN);
+}
+
+void loop() {
+    while (Serial1.available()) {
+        gps.encode(Serial1.read());
+    }
+    if (gps.location.isUpdated()) {
+        Serial.printf("Lat: %.6f  Lng: %.6f\n",
+            gps.location.lat(), gps.location.lng());
+    }
+}
+```
+
+### Keyboard (I²C)
+
+```cpp
+#include <Wire.h>
+
+#define KEYBOARD_ADDR 0x55
+
+void setup() {
+    Wire.begin(BOARD_I2C_SDA, BOARD_I2C_SCL);
+    pinMode(BOARD_KEYBOARD_INT, INPUT_PULLUP);
+}
+
+void loop() {
+    if (digitalRead(BOARD_KEYBOARD_INT) == LOW) {
+        Wire.requestFrom(KEYBOARD_ADDR, 1);
+        if (Wire.available()) {
+            char key = Wire.read();
+            Serial.printf("Key: %c\n", key);
+        }
+    }
+}
+```
+
+### Trackball
+
+```cpp
+void setup() {
+    pinMode(BOARD_TBOX_G01, INPUT);
+    pinMode(BOARD_TBOX_G02, INPUT);
+    pinMode(BOARD_TBOX_G03, INPUT);
+    pinMode(BOARD_TBOX_G04, INPUT);
+}
+```
+
+### Microphone (ES7210 — I²S)
+
+> When the microphone is enabled, **GPIO0 (BOOT / trackball center button) is not available**.
+
+```cpp
+#include <driver/i2s.h>
+
+void setup() {
+    i2s_config_t i2s_config = {
+        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
+        .sample_rate = 16000,
+        .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+        .communication_format = I2S_COMM_FORMAT_STAND_I2S,
+        .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
+        .dma_buf_count = 4,
+        .dma_buf_len = 256,
+        .use_apll = false,
+    };
+    i2s_pin_config_t pin_config = {
+        .mck_io_num   = BOARD_ES7210_MCLK,
+        .bck_io_num   = BOARD_ES7210_SCK,
+        .ws_io_num    = BOARD_ES7210_LRCK,
+        .data_in_num  = BOARD_ES7210_DIN,
+        .data_out_num = I2S_PIN_NO_CHANGE,
+    };
+    i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
+    i2s_set_pin(I2S_NUM_0, &pin_config);
+}
+```
+
+### SD Card (SPI)
+
+```cpp
+#include <SD.h>
+
+void setup() {
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI);
+    if (!SD.begin(BOARD_SDCARD_CS)) {
+        Serial.println("SD init failed");
+    }
+}
+```
+
 ## Dimension Diagram
 
 ## Schematic
@@ -159,9 +352,9 @@ examples
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [T-Deck ANT 868–915 MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20868-915MHZ.pdf.pdf)
-* [T-Deck ANT 433 MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20433MHZ.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [T-Deck ANT 868–915 MHz](/datasheet/T-Deck%20ANT%20868-915MHZ.pdf)
+* [T-Deck ANT 433 MHz](/datasheet/T-Deck%20ANT%20433MHZ.pdf)
 
 ## Software Development
 
@@ -185,10 +378,18 @@ examples
   A. No. On T-Deck Plus, the Grove interface pins are allocated to the GPS module and cannot be used as a general-purpose interface.
 
 * **Q. Does T-Deck Plus have a touch screen?**
-  A. No. It uses a trackball navigation module instead.
+  A. Yes. T-Deck Plus has a GT911 capacitive touchscreen and also keeps the trackball navigation module. The standard T-Deck does not have a touchscreen.
 
 * **Q. Upload keeps failing?**
   A. Hold the trackball center button (BOOT), insert USB, then click Upload. Press RST to exit download mode.
+
+* **Q. What should I do if LoRa initialization shows `Radio init failed: -2`?**
+  A. This usually means the sketch cannot detect the SX1262. Before initializing LoRa, set GPIO10 HIGH and pull the other SPI device CS pins HIGH, such as TFT_CS=12 and SD_CS=39. Also confirm that the sketch uses the T-Deck Plus LoRa pins: CS=9, DIO1=45, RST=17, BUSY=13.
+
+* **Q. How can I tell whether T-Deck Plus is charging or fully charged?**
+  A. Connect USB and check the blue charging indicator from the bottom side of the device. A lit blue LED means the battery is charging; when the blue LED turns off, the battery is fully charged. This is a quick way to confirm that the device can charge to full.
+
+  ![Location of the blue charging indicator on the bottom of T-Deck Plus](/products/t-deck-series/t-deck-plus/index/image/t-deck-plus-charging-led.jpg)
 
 * **Q. Arduino IDE prompts to upgrade libraries — should I?**
   A. Do not upgrade. Stay with the library versions in the `lib` directory.

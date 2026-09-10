@@ -4,11 +4,13 @@ show_source: false
 tags: ESP32-S3, 圆形显示屏, GC9A01, 旋转编码器, Wi-Fi, 蓝牙, IoT
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-encoder" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-encoder-esp32" />
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-1.jpg', alt: 'T-Encoder 正面' },
   { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-2.jpg', alt: 'T-Encoder 背面' },
+  { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-3.jpg', alt: 'T-Encoder 尺寸图' },
+  { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-info.jpg', alt: 'T-Encoder 规格参数' },
 ]" />
 
 ## 概述
@@ -84,7 +86,11 @@ LILYGO T-Encoder 是一款紧凑型 ESP32-S3 开发板，将 **1.28 英寸 GC9A0
 | USB | 1 × USB-C |
 | 扩展 | 1 × QWIIC |
 
+![T-Encoder 规格参数](/products/t-encoder-series/t-encoder/index/image/t-encoder-info.jpg)
+
 ## 引脚图
+
+![T-Encoder 引脚图](/products/t-encoder-series/t-encoder/index/image/t-encoder-pinout.jpg)
 
 ### 显示屏（GC9A01）
 
@@ -111,12 +117,12 @@ LILYGO T-Encoder 是一款紧凑型 ESP32-S3 开发板，将 **1.28 英寸 GC9A0
 
 ## 原理图
 
-- [T-Encoder GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/T-Encoder/tree/master/hardware)
+- [T-Encoder GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/T-Encoder)
 
 ## 数据手册
 
-- [ESP32-S3 数据手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [GC9A01 数据手册](https://www.buydisplay.com/download/ic/GC9A01A.pdf)
+- [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en.pdf)
+- [GC9A01 数据手册](/datasheet/GC9A01A.pdf)
 
 ## 软件库
 
@@ -124,7 +130,6 @@ LILYGO T-Encoder 是一款紧凑型 ESP32-S3 开发板，将 **1.28 英寸 GC9A0
 
 ### 依赖库
 
-- [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 - [Arduino_GFX](https://github.com/moononournation/Arduino_GFX)
 - [RotaryEncoder](http://www.mathertel.de/Arduino/RotaryEncoderLibrary.aspx)
 - [LVGL](https://github.com/lvgl/lvgl)
@@ -135,7 +140,7 @@ LILYGO T-Encoder 是一款紧凑型 ESP32-S3 开发板，将 **1.28 英寸 GC9A0
   A. 使用 RotaryEncoder 库，监控 GPIO4（A 相）和 GPIO5（B 相），库会自动处理去抖动和方向检测。
 
 * **Q. 圆形 GC9A01 显示屏可以使用 LVGL 吗？**
-  A. 可以。LVGL 兼容 GC9A01 驱动，将显示分辨率设置为 240 × 240，并在 TFT_eSPI 的 `User_Setup.h` 中设置 `GC9A01_DRIVER` 标志即可。
+ A. 可以。LVGL 兼容 GC9A01 驱动，将显示分辨率设置为 240 × 240，并使用 的 GC9A01 配置或官方显示 helper。
 
 ## 更新日志
 

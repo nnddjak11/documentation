@@ -7,9 +7,9 @@ tags: ESP32, LoRa, SX1276, SX1278, OLED, IoT
 # {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/lora3" />
 
 <ImageGallery :columns="3" :images="[
-  { src: '/products/t3-series/t3-lora32/index/image/t3-lora32-1.jpg', alt: 'LoRa32 front view' },
-  { src: '/products/t3-series/t3-lora32/index/image/t3-lora32-2.jpg', alt: 'LoRa32 product photo' },
-  { src: '/products/t3-series/t3-lora32/index/image/t3-lora32-3.jpg', alt: 'LoRa32 pin diagram' },
+  { src: '/products/t3-series/t3-lora32/index/image/lora32-1.jpg', alt: 'LoRa32 正面图' },
+  { src: '/products/t3-series/t3-lora32/index/image/lora32-2.jpg', alt: 'LoRa32 实物图' },
+  { src: '/products/t3-series/t3-lora32/index/image/lora32-pin.jpg', alt: 'LoRa32 引脚图' }
 ]" />
 
 ## Overview
@@ -176,10 +176,10 @@ The board supports SX1276/SX1278 dual-band LoRa, providing Wi-Fi + Bluetooth 4.2
 
 ## Datasheet
 
-* [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
-* [SX1276 Datasheet](https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1276)
-* [SX1278 Datasheet](https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1278)
-* [SSD1306 Datasheet](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf)
+* [ESP32 Datasheet](/datasheet/esp32_datasheet_en.pdf)
+* [SX1276 Datasheet](/datasheet/SX1276-7-8-9_Datasheet.pdf)
+* [SX1278 Datasheet](/datasheet/SX1276-7-8-9_Datasheet.pdf)
+* [SSD1306 Datasheet](/datasheet/SSD1306.pdf)
 * [CH9102 Datasheet](https://www.wch.cn/products/CH9102.html)
 
 ## Software Libraries

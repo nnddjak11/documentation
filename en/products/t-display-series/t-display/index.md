@@ -8,7 +8,6 @@ tags: ESP32, ST7789V, TFT, Wi-Fi, Bluetooth, IoT
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display/index/image/t-display-1.jpg', alt: 'T-Display front view' },
-  { src: '/products/t-display-series/t-display/index/image/t-display-2.jpg', alt: 'T-Display back view' },
 ]" />
 
 ## Overview
@@ -21,7 +20,7 @@ LILYGO T-Display is a compact ESP32 development board with a built-in **1.14-inc
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
 | :-----: | :----------------: | :-----: | :---------: |
-| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | Display demos, TFT_eSPI examples, factory test |
+| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | Display demos, factory test |
 
 ### PlatformIO
 
@@ -80,13 +79,15 @@ LILYGO T-Display is a compact ESP32 development board with a built-in **1.14-inc
 | Display | 1.14-inch ST7789V IPS TFT, 240 × 135 px |
 | Display Interface | 4-wire SPI |
 | Buttons | 2 × programmable push buttons |
-| Battery | JST-PH 1.25mm connector, supports 1S LiPo |
+| Battery | JST-GH 1.25mm connector, supports 1S LiPo |
 | USB | 1 × USB-C |
 | Working Voltage | 2.7 V – 4.2 V |
 
+![T-Display Specifications](/products/t-display-series/t-display/index/image/t-display-info.jpg)
+
 ## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T-Display Pinout](/products/t-display-series/t-display/index/image/t-display-pinout.jpg)
 
 ### Display (ST7789V)
 
@@ -119,7 +120,6 @@ LILYGO T-Display is a compact ESP32 development board with a built-in **1.14-inc
 
 ### Dependent Libraries
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 
 ## FAQ
 

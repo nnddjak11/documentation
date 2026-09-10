@@ -96,7 +96,7 @@ examples/
 - 4.7 英寸 EDO47TC1 电子墨水屏（540×960），AG 防眩光玻璃，暖色调背光
 - GT911 两点电容触控，PCF8563 实时时钟
 - 兼容树莓派 40-PIN GPIO 扩展接口
-- TF 卡槽，Type-C USB，JST-PH 2.0mm 电池接口
+- TF 卡槽，Type-C USB，JST-GH 2.0mm 电池接口
 - 2.5D 弧面设计，6 × 3.8mm 定位孔
 
 ## 产品参数
@@ -149,12 +149,12 @@ examples/
 
 ## 原理图
 
-* [T5-ePaper-S3-V2.4](https://github.com/Xinyuan-LilyGO/LilyGo-EPD47/blob/esp32s3/schematic/T5-ePaper-S3-V2.4.pdf)
+* [T5-ePaper-S3-V2.4](https://github.com/Xinyuan-LilyGO/LilyGo-EPD47/blob/esp32s3/schematic/Screen-4.7-S3-V2.4%2024-12-03.pdf)
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [ED047TC1 屏幕数据手册](https://github.com/Xinyuan-LilyGO/LilyGo-EPD47/blob/esp32s3/datasheet/ED047TC1.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [ED047TC1 屏幕数据手册](/datasheet/ED047TC1.pdf)
 
 ## 软件开发
 

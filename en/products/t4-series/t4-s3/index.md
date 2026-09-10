@@ -9,6 +9,7 @@ tags: ESP32-S3, AMOLED, Touch, Display, WiFi, Bluetooth
 <ImageGallery :columns="3" :images="[
   { src: '/products/t4-series/t4-s3/index/image/t4-s3-1.jpg', alt: 'T4-S3 front view' },
   { src: '/products/t4-series/t4-s3/index/image/t4-s3-2.jpg', alt: 'T4-S3 back view' },
+  { src: '/products/t4-series/t4-s3/index/image/t4-s3-3.jpg', alt: 'T4-S3 dimensions' },
 ]" />
 
 ## Overview
@@ -93,9 +94,22 @@ LILYGO T4-S3 is a compact development board based on the **ESP32-S3R8** dual-cor
 | Weight | <!-- placeholder --> |
 | Package size | <!-- placeholder --> |
 
+## Power Consumption Reference
+
+| Operating Condition | Current | Wake-Up Source |
+| :-- | :-- | :-- |
+| CPU at 240 MHz, Wi-Fi on | 90-230+ mA | - |
+| Sleep | About 230 µA | External GPIO0 |
+
+> Values published in the [official LilyGo AMOLED Series repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series#current-consumption). Actual current depends on display brightness, wireless activity, enabled peripherals, and firmware.
+
 ## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T4-S3 Specifications](/products/t4-series/t4-s3/index/image/t4-s3-info.jpg)
+
+### Pinout Diagram
+
+![T4-S3 Pinout](/products/t4-series/t4-s3/index/image/t4-s3-pinout.jpg)
 
 ## Dimensions
 
@@ -107,15 +121,15 @@ LILYGO T4-S3 is a compact development board based on the **ESP32-S3R8** dual-cor
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## Software Libraries
 
 * [LilyGo-AMOLED-Series GitHub Repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series)
+* [Quick Start Guide](quick-start.md)
 
 ### Dependent Libraries
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [LVGL](https://github.com/lvgl/lvgl)
 * [Arduino_GFX](https://github.com/moononournation/Arduino_GFX)
 

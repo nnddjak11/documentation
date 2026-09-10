@@ -9,6 +9,8 @@ tags: ESP32-S3, AMOLED, SH8501B0, Touch, AXP2101, Display, Low Power, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display-amoled-lite/index/image/t-display-amoled-lite-1.jpg', alt: 'T-Display-AMOLED-Lite 正面图' },
   { src: '/products/t-display-series/t-display-amoled-lite/index/image/t-display-amoled-lite-2.jpg', alt: 'T-Display-AMOLED-Lite 背面图' },
+  { src: '/products/t-display-series/t-display-amoled-lite/index/image/t-display-amoled-lite-3.jpg', alt: 'T-Display-AMOLED-Lite 尺寸图' },
+  { src: '/products/t-display-series/t-display-amoled-lite/index/image/t-display-amoled-lite-info.jpg', alt: 'T-Display-AMOLED-Lite 规格参数' },
 ]" />
 
 ## 概述
@@ -84,6 +86,8 @@ LILYGO T-Display-AMOLED-Lite 是一款基于 **ESP32-S3R8**（双核 LX7，240 M
 | USB | 1 × USB-C |
 | 电池 | 锂聚合物，AXP2101 集成充电管理 |
 
+![T-Display-AMOLED-Lite 规格参数](/products/t-display-series/t-display-amoled-lite/index/image/t-display-amoled-lite-info.jpg)
+
 ## 引脚图
 
 ### 显示屏
@@ -135,9 +139,9 @@ LILYGO T-Display-AMOLED-Lite 是一款基于 **ESP32-S3R8**（双核 LX7，240 M
 
 ## 数据手册
 
-* [ESP32-S3 数据手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SH8501B0 数据手册](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/blob/master/datasheet/SH8501B0%20DataSheet.pdf)
-* [AXP2101 数据手册](https://github.com/Xinyuan-LilyGO/XPowersLib/blob/master/datasheet/AXP2101_Datasheet_V1.0_en.pdf)
+* [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SH8501B0 数据手册](/datasheet/SH8501B0%20DataSheet.pdf)
+* [AXP2101 数据手册](/datasheet/AXP2101_Datasheet_V1.4_en.pdf)
 * CHSC5816 触摸控制器
 * CM32181A3OP 环境光传感器
 

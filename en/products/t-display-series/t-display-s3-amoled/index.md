@@ -9,6 +9,7 @@ tags: ESP32-S3, AMOLED, RM67162, Touch, Wi-Fi, Bluetooth, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-1.jpg', alt: 'T-Display-S3-AMOLED front view' },
   { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-2.jpg', alt: 'T-Display-S3-AMOLED back view' },
+  { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-3.jpg', alt: 'T-Display-S3-AMOLED dimensions' },
 ]" />
 
 ## Overview
@@ -90,9 +91,20 @@ LILYGO T-Display-S3-AMOLED is an upgraded version of the T-Display-S3, featuring
 | Buttons | 2 × programmable push buttons |
 | USB | 1 × USB-C |
 
+![T-Display-S3-AMOLED Specifications](/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-info.jpg)
+
+## Power Consumption Reference
+
+| Operating Condition | Current | Wake-Up Source |
+| :-- | :-- | :-- |
+| CPU at 240 MHz, Wi-Fi on | 90-230+ mA | - |
+| Sleep | About 230 µA | External GPIO0 |
+
+> Values published in the [official LilyGo AMOLED Series repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series#current-consumption). Actual current depends on display brightness, wireless activity, enabled peripherals, and firmware.
+
 ## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T-Display-S3-AMOLED Pinout](/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-pinout.jpg)
 
 ### Display (RM67162)
 
@@ -110,8 +122,8 @@ LILYGO T-Display-S3-AMOLED is an upgraded version of the T-Display-S3, featuring
 
 ## Datasheet
 
-* [RM67162 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-S3-AMOLED/blob/main/datasheet/RM67162%20DataSheet_V0.0.pdf)
-* [ESP32-S3 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-S3-AMOLED/blob/main/doc/esp32-s3_datasheet_en.pdf)
+* [RM67162 Datasheet](/datasheet/RM67162%20DataSheet_V0.0.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en-b8ebdddf.pdf)
 
 ## Software Libraries
 

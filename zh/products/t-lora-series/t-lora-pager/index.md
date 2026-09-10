@@ -116,6 +116,20 @@ T-LoraPager 是一款 LILYGO 推出的手持式 AIOT 可编程开发设备，集
 | 固定孔 | 1/4 英寸螺丝接口 + 4 × M2 背孔 |
 | 尺寸 | 106 × 89 × 23mm |
 
+## 电气参数
+
+| 项目 | 参数 |
+| :-- | :-- |
+| USB-C 输入电压 | 3.9 V - 6 V |
+| USB-C 输出电压 | 4.55 V - 5.55 V |
+| USB-C 输出电流 | 0.5 A - 1 A |
+| 充电电流 | 0 - 3008 mA（可编程） |
+| 电池电压 | 3.7 V |
+| 电池容量 | 1500 mAh（5.55 Wh） |
+| 充电温度范围 | 0 - 60°C |
+
+> 推荐充电电流：**< 750 mA**。充电电流不应超过电池容量的一半。
+
 ## 引脚图
 
 <img src="/products/t-lora-series/t-lora-pager/index/image/t-lorapager-3.jpg" alt="T-LoraPager 引脚图" width=100%>
@@ -166,18 +180,21 @@ T-LoraPager 是一款 LILYGO 推出的手持式 AIOT 可编程开发设备，集
 
 ## 原理图
 
-* [T-LoraPager_V1.0](https://github.com/Xinyuan-LilyGO/LilyGoLib/blob/master/Files/(N314)T-Lora_Pager_LR1121_Module_V1.0_20250805.pdf)
+* [T-LoraPager_V1.0](https://github.com/Xinyuan-LilyGO/LilyGoLib/blob/master/schematic/T-Lora%20Pager%20V1.0%20SCH%2025-06-13.pdf)
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SX1262 Datasheet](https://www.semtech.com/products/wireless-rf/lora-core/sx1262)
-* [MIA-M10Q Datasheet](https://www.u-blox.com/en/product/mia-m10-series)
-* [BHI260AP Datasheet](https://www.bosch-sensortec.com/products/motion-sensors/imu/bhi260ap/)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SX1262 Datasheet](/datasheet/DS_SX1261_SX1262.pdf)
+* [MIA-M10Q Datasheet](/datasheet/MIA-M10Q_DataSheet_UBX-22015849.pdf)
+* [BHI260AP Datasheet](/datasheet/bst-bhi260ap-ds000.pdf)
 
 ## 软件开发
 
 * [LilyGoLib GitHub 仓库](https://github.com/Xinyuan-LilyGO/LilyGoLib)
+* [快速上手指南](quick-start.md)
+* [出厂固件使用指南](factory.md)
+* [VibeKeyboard 使用指南](vibe-keyboard.md)
 * [使用 T-Lora Pager 运行 Claude Desktop Buddy](claude-desktop-buddy.md)
 
 ### 依赖库

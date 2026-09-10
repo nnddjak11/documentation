@@ -29,7 +29,7 @@ LILYGO T-QT-C6 是基于 ESP32-C6-MINI-1U 微控制器的智能可穿戴开发�
 | [IMU](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/IMU) | ✓ | 六轴 IMU 示例 |
 | [IMU_Level](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/IMU_Level) | ✓ | IMU 水平仪示例 |
 | [Battery_Voltage](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/Battery_Voltage) | ✓ | 电池电量检测 |
-| [Breathing_Light](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/BREATHING_LIGHT) | ✓ | 呼吸灯示例 |
+| [Breathing_Light](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/arduino-esp32-libs_V3.0.2/examples/Breathing_Light) | ✓ | 呼吸灯示例 |
 | [Deep_Sleep](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/Deep_Sleep) | ✓ | 深度睡眠（约 172µA） |
 | [Light_Sleep](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/Light_Sleep) | ✓ | 轻度睡眠（约 517µA） |
 | [SGM41562](https://github.com/Xinyuan-LilyGO/T-QT-C6/tree/master/examples/SGM41562) | ✓ | 电源管理芯片（V1.2） |
@@ -95,6 +95,15 @@ LILYGO T-QT-C6 是基于 ESP32-C6-MINI-1U 微控制器的智能可穿戴开发�
 | 按键 | RESET + BOOT |
 | 尺寸 | 33×24×44.5mm |
 
+## 功耗参考
+
+| 硬件版本 | 模式 / 测试固件 | 电流 |
+| :-- | :-- | :-- |
+| T-QT-C6 V1.2 | 浅睡眠 | 553 µA |
+| T-QT-C6 V1.2 | 深度睡眠 | 170 µA |
+
+> 数据在电池输入端使用官方睡眠测试固件测得，详见 [T-QT-C6 V1.2 功耗测试报告](https://github.com/Xinyuan-LilyGO/T-QT-C6/blob/arduino-esp32-libs_V3.0.2/relevant_test/PowerConsumptionTestLog_%5BT-QT-C6_V1.2%5D_20241122.pdf)。V1.0-V1.1 使用不同的 PMU，结果可能不同。
+
 ## 引脚图
 
 <img src="/products/other/t-qt-c6/index/image/t-qt-c6-pin-zh.jpg" alt="T-QT C6 引脚图" width=100%>
@@ -126,15 +135,13 @@ LILYGO T-QT-C6 是基于 ESP32-C6-MINI-1U 微控制器的智能可穿戴开发�
 
 ## 原理图
 
-* [T-QT-C6 V1.0 原理图](https://github.com/Xinyuan-LilyGO/T-QT-C6/blob/master/project/T-QT-C6_V1.0)
-* [T-QT-C6 V1.1 原理图](https://github.com/Xinyuan-LilyGO/T-QT-C6/blob/master/project/T-QT-C6_V1.1)
 * [T-QT-C6 V1.2 原理图](https://github.com/Xinyuan-LilyGO/T-QT-C6/blob/master/project/T-QT-C6_V1.2)
 
 ## 数据手册
 
-* [ESP32-C6 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c6-mini-1_mini-1u_datasheet_en.pdf)
-* [LSM6DSL Datasheet](https://www.st.com/resource/en/datasheet/lsm6dsl.pdf)
-* [SGM41562 Datasheet](https://www.sg-micro.com/uploads/soft/20230630/1688108945.pdf)
+* [ESP32-C6 Datasheet](/datasheet/esp32-c6-mini-1_mini-1u_datasheet_en.pdf)
+* [LSM6DSL Datasheet](/datasheet/lsm6dsl.pdf)
+* [SGM41562 Datasheet](/datasheet/SGMICRO-SGM41562XGTR.pdf)
 
 ## 软件开发
 
@@ -142,7 +149,7 @@ LILYGO T-QT-C6 是基于 ESP32-C6-MINI-1U 微控制器的智能可穿戴开发�
 
 ### 依赖库
 
-* [Arduino_DriveBus 1.1.16](https://github.com/Xinyuan-LilyGO/Arduino_DriveBus)
+* [Arduino_DriveBus 1.1.16](https://github.com/Llgok/Arduino_DriveBus)
 * [Arduino_GFX 1.3.7](https://github.com/moononournation/Arduino_GFX)
 * [lvgl 8.3.5](https://github.com/lvgl/lvgl)
 
@@ -155,7 +162,7 @@ LILYGO T-QT-C6 是基于 ESP32-C6-MINI-1U 微控制器的智能可穿戴开发�
   A. 通过板载 QWIIC 4pin 接口快速连接兼容传感器模块，也可通过 2×7 扩展 IO 接口连接其他外设。
 
 * **Q. 如何实现低功耗运行？**  
-  A. Deep Sleep 约 172µA，Light Sleep 约 517µA。结合 SGM41562 PMU 和软件低功耗模式可实现长时间电池供电。
+  A. V1.2 官方实测深度睡眠约 170 µA、浅睡眠约 553 µA。V1.0-V1.1 使用不同的 PMU，结果可能不同。
 
 * **Q. V1.0/V1.1 和 V1.2 有什么区别？**  
   A. V1.2 将电源管理芯片更换为 SGM41562（原为 ETA4662），稳定性更好；电池背板 V1.2 改用 2pin 1.25mm 间距引脚座连接，提高系统稳定性。

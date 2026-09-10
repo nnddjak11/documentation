@@ -148,6 +148,20 @@ The development board is feature-rich, integrating QWERT keyboard, AI-enabled IM
 | GPIO Expand                      | XINLUDA XL9555             |
 | SD Card Socket                   | Maximum 32GB (FAT32 format)    |
 
+## Electrical Parameters
+
+| Feature | Details |
+| :-- | :-- |
+| USB-C Input Voltage | 3.9 V - 6 V |
+| USB-C Output Voltage | 4.55 V - 5.55 V |
+| USB-C Output Current | 0.5 A - 1 A |
+| Charge Current | 0 - 3008 mA (programmable) |
+| Battery Voltage | 3.7 V |
+| Battery Capacity | 1500 mAh (5.55 Wh) |
+| Charge Temperature Range | 0 - 60°C |
+
+> Recommended charging current: **< 750 mA**. The charging current should not exceed half of the battery capacity.
+
 ## Pin Diagram
 
 <img src="/products/t-lora-series/t-lora-pager/index/image/t-lorapager-3.jpg" alt="summary" width=100%>
@@ -246,18 +260,21 @@ The development board is feature-rich, integrating QWERT keyboard, AI-enabled IM
 
 ## Schematic
 
-* [T-Lora Pager Schematic PDF](/products/t-lora-series/t-lora-pager/index/hardware/T-Lora%20Pager%20V1.0%20SCH%2025-06-13.pdf)
+* [T-Lora Pager Schematic PDF](https://github.com/Xinyuan-LilyGO/LilyGoLib/blob/master/schematic/T-Lora%20Pager%20V1.0%20SCH%2025-06-13.pdf)
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SX1262 Datasheet](https://www.semtech.com/products/wireless-rf/lora-core/sx1262)
-* [MIA-M10Q Datasheet](https://www.u-blox.com/en/product/mia-m10-series)
-* [BHI260AP Datasheet](https://www.bosch-sensortec.com/products/motion-sensors/imu/bhi260ap/)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SX1262 Datasheet](/datasheet/DS_SX1261_SX1262.pdf)
+* [MIA-M10Q Datasheet](/datasheet/MIA-M10Q_DataSheet_UBX-22015849.pdf)
+* [BHI260AP Datasheet](/datasheet/bst-bhi260ap-ds000.pdf)
 
 ## Software Development
 
 * [LilyGoLib](https://github.com/Xinyuan-LilyGO/LilyGoLib)
+* [Quick Start Guide](quick-start.md)
+* [Factory Firmware User Guide](factory.md)
+* [VibeKeyboard User Guide](vibe-keyboard.md)
 * [Claude Desktop Buddy with T-Lora pager](claude-desktop-buddy.md)
 
 ## FAQ

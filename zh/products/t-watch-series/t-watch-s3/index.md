@@ -1,20 +1,20 @@
 ---
-title: LILYGO T-Watch S3 Plus
+title: LILYGO T-Watch S3
 show_source: false
-tags: ESP32-S3, Watch, LoRa, LCD, GPS, Wearable
+tags: ESP32-S3, Watch, LoRa, LCD, Wearable
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-watch-s3-plus" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-watch-s3" />
 
 <ImageGallery :columns="3" :images="[
-  { src: '/products/t-watch-series/t-watch-s3-plus/index/image/t-watch-s3-plus1.jpg', alt: 'T-Watch S3 Plus 正面图' },
-  { src: '/products/t-watch-series/t-watch-s3-plus/index/image/t-watch-s3-plus2.jpg', alt: 'T-Watch S3 Plus 实物图' },
-  { src: '/products/t-watch-series/t-watch-s3-plus/index/image/t-watch-s3-plus3.jpg', alt: 'T-Watch S3 Plus 引脚图' }
+  { src: '/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-1.jpg', alt: 'T-Watch S3 正面图' },
+  { src: '/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-3.jpg', alt: 'T-Watch S3 引脚图' },
+  { src: '/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-info.jpg', alt: 'T-Watch S3 信息图' }
 ]" />
 
 ## 概述
 
-T-Watch S3 Plus 是 T-Watch S3 的升级版本，在原有基础上增加了 GPS 功能，是一款多功能智能可穿戴设备，集成了高性能硬件与无线通信技术，适用于运动健康监测、远程交互及音频场景。核心配置包括 1.54 英寸 240×240 高清 LCD 显示屏，搭配 BMA423 轴传感器和电容式触摸模块，内置 Max98357A 音频放大器与 PDM 麦克风，支持高质量音频输出及语音指令输入。目前有 SX1262 和 SX1280 两个 LoRa 版本，可实现远距离低功耗无线通信。
+T-Watch S3 是一款多功能智能可穿戴设备，集成了高性能硬件与无线通信技术，适用于运动健康监测、远程交互及音频场景。核心配置包括 1.54 英寸 240×240 高清 LCD 显示屏，搭配 BMA423 轴传感器和电容式触摸模块，内置 Max98357A 音频放大器与 PDM 麦克风，支持高质量音频输出及语音指令输入。目前有 SX1262 和 SX1280 两个 LoRa 版本，可实现远距离低功耗无线通信。
 
 ## 快速开始
 
@@ -82,11 +82,28 @@ T-Watch S3 Plus 是 T-Watch S3 的升级版本，在原有基础上增加了 GPS
 | 按键 | POWER（长按2s开机，长按6s关机）+ BOOT |
 | 尺寸 | 51.5 × 42 × 20mm（不含表带） |
 
+## 电气参数
+
+| 项目 | 参数 |
+| :-- | :-- |
+| MicroUSB 输入电压 | 3.9 V - 6 V |
+| 充电电流 | 0 - 1024 mA（可编程） |
+| 电池电压 | 3.8 V |
+| 电池容量 | 470 mAh |
+
+> 推荐充电电流：**< 130 mA**。过大的充电电流可能损坏电池。长时间不使用时，请将电池开关拨到 OFF。
+
+## 产品对比
+
+<img src="/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-compare.jpg" alt="T-Watch S3 产品对比图" width=100%>
+
 ## 引脚图
 
-<img src="/products/t-watch-series/t-watch-s3-plus/index/image/t-watch-s3-plus3.jpg" alt="T-Watch S3 Plus 引脚图" width=100%>
+<img src="/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-pinout.jpg" alt="T-Watch S3 引脚图" width=100%>
 
 ## 尺寸图
+
+<img src="/products/t-watch-series/t-watch-s3/index/image/t-watch-s3-info.jpg" alt="T-Watch S3 尺寸图" width=100%>
 
 ## 原理图
 
@@ -94,7 +111,7 @@ T-Watch S3 Plus 是 T-Watch S3 的升级版本，在原有基础上增加了 GPS
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## 软件开发
 
@@ -109,14 +126,26 @@ T-Watch S3 Plus 是 T-Watch S3 的升级版本，在原有基础上增加了 GPS
 * **Q. 如何开机/关机？**  
   A. 按住 POWER 按键约 2 秒开机，按住约 6 秒关机。
 
-* **Q. T-Watch S3 Plus 和 T-Watch S3 有什么区别？**  
-  A. Plus 版本在 T-Watch S3 基础上新增了 GPS 功能，其余硬件规格相同。
-
 * **Q. 为什么我的板子一直烧录失败？**  
   A. 请按住 BOOT 按键重新下载程序。
+
+## 功耗参考
+
+| 模式 | 唤醒方式 | 电流 |
+| :-- | :-- | :-- |
+| 轻睡眠 | 电源按钮 + BOOT 按钮 + 触摸面板 | 2.38 mA |
+| 轻睡眠 | 电源按钮 + BOOT 按钮 | 暂无数据 |
+| 深度睡眠 | 电源按钮 + BOOT 按钮（备份电源开启） | 530 µA |
+| 深度睡眠 | 电源按钮 + BOOT 按钮（备份电源关闭） | 460 µA |
+| 深度睡眠 | 触摸面板 | 1.08 mA |
+| 深度睡眠 | 定时器（备份电源开启） | 510 µA |
+| 深度睡眠 | 定时器（备份电源关闭） | 460 µA |
+| 关机 | 仅保留备份电源 | 50 µA |
+
+> 数据来自[官方 T-Watch S3 硬件文档](https://github.com/Xinyuan-LilyGO/LilyGoLib/blob/master/docs/hardware/lilygo-t-watch-s3.md#-power-consumption-reference)，实际电流会随固件和已启用外设变化。触摸复位引脚未连接；若让触摸控制器进入睡眠，将无法通过触摸唤醒。
 
 ## 版本历史
 
 | Version | Update date | Update description |
 | :-----: | :---------: | :----------------: |
-| T-Watch-S3-Plus_V1.0 | — | 初始版本 |
+| T-Watch-S3_V1.0 | — | 初始版本 |

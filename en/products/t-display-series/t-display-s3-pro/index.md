@@ -1,7 +1,7 @@
 ---
 title: T-Display S3 Pro
 show_source: false
-tags: ESP32-S3, IPS, TFT_eSPI, USB OTG, Camera, Capacitive Touch
+tags: ESP32-S3, IPS, USB OTG, Camera, Capacitive Touch
 ---
 
 # {{ $frontmatter.title }} <ShopLink href="https://www.lilygo.cc/products/t-display-s3-pro" />
@@ -21,7 +21,7 @@ T-Display S3 Pro is a high-performance development board based on **ESP32-S3R8**
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
 | :-----: | :----------------: | :-----: | :---------: |
-| [T-Display-S3-Pro](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro) | ✓ | | Factory, TFT, PMU, USB HID, camera examples |
+| [T-Display-S3-Pro](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro) | ✓ | | Factory, Arduino_GFX, PMU, USB HID, camera examples |
 
 ### PlatformIO
 
@@ -91,6 +91,21 @@ T-Display S3 Pro is a high-performance development board based on **ESP32-S3R8**
 | Mounting Holes | 4 × 2 mm |
 | Dimensions | 56.5 × 56.5 × 9.6 mm |
 
+## Electrical Parameters
+
+| Feature | Details |
+| :-- | :-- |
+| USB-C Input Voltage | 3.9 V - 6 V |
+| USB-C Output Voltage | 4.55 V - 5.55 V |
+| USB-C Output Current | 0.5 A - 1 A |
+| Charge Current | 0 - 5056 mA (programmable) |
+| Battery Voltage | 3840 - 4608 mV (programmable) |
+| Battery Capacity | 3800 mV / 470 mAh |
+| Battery Connector | ACHL connector 1.2 mm |
+| Charge Temperature | 0 - 60°C |
+
+> Recommended charging current: **< 200 mA**. The charging current should not exceed half of the battery capacity. When no battery is connected, disable charging to keep power stable.
+
 ## Pin Diagram
 
 <img src="/products/t-display-series/t-display-s3-pro/index/image/t-display-s3 pro-pin.jpg" alt="T-Display S3 Pro front pin diagram" width=100%>
@@ -100,11 +115,11 @@ T-Display S3 Pro is a high-performance development board based on **ESP32-S3R8**
 
 ## Schematic
 
-* [T-Display-S3-Pro Schematic](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/blob/main/schematic/T-Display-S3-Pro.pdf)
+* [T-Display-S3-Pro Schematic](https://github.com/Xinyuan-LilyGO/T-Display-S3-Pro/blob/master/schematic/T-Display-Pro.pdf)
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## Software Development
 
@@ -112,7 +127,6 @@ T-Display S3 Pro is a high-performance development board based on **ESP32-S3R8**
 
 ### Dependent Libraries
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [Arduino_GFX](https://github.com/moononournation/Arduino_GFX)
 * [XPowersLib](https://github.com/lewisxhe/XPowersLib)
 * [SensorLib](https://github.com/lewisxhe/SensorLib)

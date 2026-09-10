@@ -9,6 +9,7 @@ tags: ESP32-S3, AMOLED, RM67162, Touch, Wi-Fi, Bluetooth, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-1.jpg', alt: 'T-Display-S3-AMOLED 正面' },
   { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-2.jpg', alt: 'T-Display-S3-AMOLED 背面' },
+  { src: '/products/t-display-series/t-display-s3-amoled/index/image/t-display-s3-amoled-3.jpg', alt: 'T-Display-S3-AMOLED 尺寸图' },
 ]" />
 
 ## 概述
@@ -90,6 +91,15 @@ LILYGO T-Display-S3-AMOLED 是 T-Display-S3 的升级版本，搭载 **1.91 英�
 | 按键 | 2 × 可编程按键 |
 | USB | 1 × USB-C |
 
+## 功耗参考
+
+| 工作条件 | 电流 | 唤醒方式 |
+| :-- | :-- | :-- |
+| CPU 240 MHz、Wi-Fi 开启 | 90-230+ mA | - |
+| 睡眠 | 约 230 µA | 外部 GPIO0 |
+
+> 数据来自[官方 LilyGo AMOLED Series 仓库](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series#current-consumption)。实际电流会随屏幕亮度、无线活动、已启用外设及固件变化。
+
 ## 引脚图
 
 <!-- GPIO 映射关系表。 -->
@@ -110,8 +120,8 @@ LILYGO T-Display-S3-AMOLED 是 T-Display-S3 的升级版本，搭载 **1.91 英�
 
 ## 数据手册
 
-* [RM67162 数据手册](https://github.com/Xinyuan-LilyGO/T-Display-S3-AMOLED/blob/main/datasheet/RM67162%20DataSheet_V0.0.pdf)
-* [ESP32-S3 数据手册](https://github.com/Xinyuan-LilyGO/T-Display-S3-AMOLED/blob/main/doc/esp32-s3_datasheet_en.pdf)
+* [RM67162 数据手册](/datasheet/RM67162%20DataSheet_V0.0.pdf)
+* [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en-b8ebdddf.pdf)
 
 ## 软件开发
 

@@ -106,6 +106,14 @@ LILYGO T-TWR REV2.1 是一款基于 ESP32-S3-WROOM-1-N16R8 的对讲机开发板
 | 安装孔 | 2 × 2mm 定位孔 |
 | 尺寸 | 126 × 39 × 29mm（天线约 200mm） |
 
+## 功耗参考
+
+| 硬件版本 | 模式 / 测试固件 | 电流 |
+| :-- | :-- | :-- |
+| T-TWR Rev2.1 | 深度睡眠 / `Factory` 示例 | 约 680 µA |
+
+> 数据来自[官方 T-TWR 仓库](https://github.com/Xinyuan-LilyGO/T-TWR#faq)。无线电发射电流明显更高，并随发射功率档位变化；请使用能够满足峰值电流需求的电池。
+
 ## 引脚图
 
 <img src="/products/t-twr-series/t-twr/index/image/t-twr-3.jpg" alt="T-TWR 引脚图" width=100%>
@@ -118,9 +126,9 @@ LILYGO T-TWR REV2.1 是一款基于 ESP32-S3-WROOM-1-N16R8 的对讲机开发板
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SA868 Datasheet](https://github.com/Xinyuan-LilyGO/T-TWR/blob/master/datasheet/SA868%202W%20Embedded%20walkie%20talkie%20moduleV1.3.pdf)
-* [SH1106 Datasheet](https://github.com/Xinyuan-LilyGO/T-TWR/blob/master/datasheet/SPEC%20X096-2864KSWPG17-C30%20VER%20A.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SA868 Datasheet](/datasheet/SA868%202W%20Embedded%20walkie%20talkie%20moduleV1.3.pdf)
+* [SH1106 Datasheet](/datasheet/SPEC%20X096-2864KSWPG17-C30%20VER%20A.pdf)
 
 ## 软件开发
 

@@ -18,6 +18,8 @@ LILYGO T-Deck Pro 是一款基于 ESP32-S3 芯片的高度集成多功能开发�
 
 ## 快速开始
 
+> **MeshCore 用户注意（V1.1）：** 由于 V1.1 版本存在若干硬件配置和触摸芯片变更，使用 MeshCore 固件的用户请加入 [MeshCore Discord](https://meshcore.gg/) 并进入 **#ripple-gui** 频道，MeshCore 团队可在那里直接为您提供支持。
+
 ### 示例支持
 
 | 示例 | PlatformIO | Arduino | 描述 |
@@ -199,19 +201,20 @@ A7682E 为 LTE Cat1 模块，支持 LTE-FDD/GSM/GPRS/EDGE 无线通信，通过 
 
 ## 原理图
 
-* [T-DeckPro V1.0](https://github.com/Xinyuan-LilyGO/T-Deck-Pro/blob/master/hardware/T-Deckpro%2024-05-16/T-DeckPro%20V1.0%2024-05-16.pdf)
+* [T-DeckPro V1.0](https://github.com/Xinyuan-LilyGO/T-Deck-Pro/blob/master/hardware/T-Deckpro%20v1.0%2024-05-16/T-DeckPro%20V1.0%2024-05-16.pdf)
 * [T-DeckPro V1.1](https://github.com/Xinyuan-LilyGO/T-Deck-Pro/tree/HD-V2-250915/hardware/T-Deckpro%20v1.1%2025-09-15)
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [SX1262 Datasheet](https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1262)
-* [MIA-M10Q Datasheet](https://www.u-blox.com/en/product/mia-m10-series)
-* [BHI260AP Datasheet](https://www.bosch-sensortec.com/products/motion-sensors/imu/bhi260ap/)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [SX1262 Datasheet](/datasheet/DS_SX1261_SX1262.pdf)
+* [MIA-M10Q Datasheet](/datasheet/MIA-M10Q_DataSheet_UBX-22015849.pdf)
+* [BHI260AP Datasheet](/datasheet/bst-bhi260ap-ds000.pdf)
 
 ## 软件开发
 
 * [T-Deck-Pro GitHub 仓库](https://github.com/Xinyuan-LilyGO/T-Deck-Pro)
+* [快速上手指南](quick-start.md)
 
 ### 依赖库
 

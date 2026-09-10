@@ -4,11 +4,12 @@ show_source: false
 tags: ESP32, WROVER, PSRAM, Wi-Fi, Bluetooth, MicroPython, IoT
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t8" />
+# {{ $frontmatter.title }}
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t8-series/t8/index/image/t8-1.jpg', alt: 'T8 front view' },
   { src: '/products/t8-series/t8/index/image/t8-2.jpg', alt: 'T8 back view' },
+  { src: '/products/t8-series/t8/index/image/t8-3.jpg', alt: 'T8 dimensions' },
 ]" />
 
 ## Overview
@@ -65,9 +66,12 @@ LILYGO T8 is an ESP32-WROVER based development board featuring **8 MB PSRAM**, 4
 | Operating Voltage | 2.3–3.6 V |
 | Dimensions | 65 × 26 × 10 mm |
 
-## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T8 Specifications](/products/t8-series/t8/index/image/t8-info.jpg)
+
+### Pinout Diagram
+
+![T8 Pinout](/products/t8-series/t8/index/image/t8-pinout.jpg)
 
 ## Schematic
 
@@ -75,7 +79,7 @@ LILYGO T8 is an ESP32-WROVER based development board featuring **8 MB PSRAM**, 4
 
 ## Datasheet
 
-* [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+* [ESP32 Datasheet](/datasheet/esp32_datasheet_en.pdf)
 
 ## Software Libraries
 

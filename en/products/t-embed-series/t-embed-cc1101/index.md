@@ -111,10 +111,10 @@ LILYGO T-Embed CC1101 is a highly integrated IoT development board based on **ES
 
 ## Datasheet
 
-* [PN532](https://github.com/Xinyuan-LilyGO/T-Embed-CC1101/blob/master/hardware/PN532_C1.pdf)
-* [BQ25896](https://github.com/Xinyuan-LilyGO/T-Embed-CC1101/blob/master/hardware/bq25896.pdf)
-* [BQ27220](https://github.com/Xinyuan-LilyGO/T-Embed-CC1101/blob/master/hardware/bq27220_datasheet.pdf)
-* [CC1101](https://github.com/Xinyuan-LilyGO/T-Embed-CC1101/blob/master/hardware/cc1101.pdf)
+* [PN532](/datasheet/PN532_C1.pdf)
+* [BQ25896](/datasheet/bq25896.pdf)
+* [BQ27220](/datasheet/bq27220_datasheet.pdf)
+* [CC1101](/datasheet/cc1101.pdf)
 
 ## Software Development
 
@@ -125,7 +125,6 @@ LILYGO T-Embed CC1101 is a highly integrated IoT development board based on **ES
 * [RadioLib](https://github.com/jgromes/RadioLib)
 * [PN532](https://github.com/Seeed-Studio/PN532)
 * [XPowersLib](https://github.com/lewisxhe/XPowersLib)
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [RotaryEncoder](http://www.mathertel.de/Arduino/RotaryEncoderLibrary.aspx)
 * [FastLED](https://github.com/FastLED/FastLED)
 * [IRremoteESP8266](https://github.com/crankyoldgit/IRremoteESP8266)

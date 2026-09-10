@@ -9,6 +9,7 @@ tags: ESP32, ST7789V, TFT, Keyboard, Wi-Fi, Bluetooth, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-display-series/t-display-keyboard/index/image/t-display-keyboard-1.jpg', alt: 'T-Display-Keyboard 正面' },
   { src: '/products/t-display-series/t-display-keyboard/index/image/t-display-keyboard-2.jpg', alt: 'T-Display-Keyboard 背面' },
+  { src: '/products/t-display-series/t-display-keyboard/index/image/t-display-keyboard-3.jpg', alt: 'T-Display-Keyboard 尺寸图' },
 ]" />
 
 ## 概述
@@ -21,7 +22,7 @@ LILYGO T-Display-Keyboard 是一款手持式 ESP32 开发套件，将 **T-Displa
 
 | 示例 | PlatformIO/Arduino | ESP-IDF | 描述 |
 | :-----: | :----------------: | :-----: | :---------: |
-| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | 显示屏演示、TFT_eSPI 示例 |
+| [TTGO-T-Display](https://github.com/Xinyuan-LilyGO/TTGO-T-Display) | ✓ | | 显示屏演示、示例 |
 
 ### PlatformIO
 
@@ -112,7 +113,6 @@ LILYGO T-Display-Keyboard 是一款手持式 ESP32 开发套件，将 **T-Displa
 
 ### 依赖库
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 
 ## 常见问题
 

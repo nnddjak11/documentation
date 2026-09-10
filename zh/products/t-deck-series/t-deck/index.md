@@ -16,9 +16,14 @@ tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard
 
 LILYGO T-Deck 是一款基于 ESP32-S3 的多功能嵌入式开发平台，搭载 2.8 英寸 ST7789 LCD（320×240）、轨迹球导航模块（替代触摸屏）、物理键盘（I²C）、SX1262 LoRa、MIA-M10Q GNSS、ES7210 麦克风阵列和 TF 卡，支持 2000mAh 锂电池供电，适用于物联网终端、便携式通信设备和低功耗无线项目开发。
 
-> **注意：** T-Deck 版本无触摸屏，使用轨迹球导航代替。T-Deck-Plus 已将 Grove 接口引脚分配给 GPS 模块，Grove 接口不可使用。
+> **注意：**
+> 1. T-Deck 版本无触摸屏，使用轨迹球导航代替。T-Deck-Plus 已将 Grove 接口引脚分配给 GPS 模块，Grove 接口不可使用。
+> 2. LoRa 无线电模块与其他外设共享 SPI 总线。一次只能选择一个 SPI 设备，因此请确保在与 SX1262 通信之前，所有其他 SPI 设备的 CS 线都处于高电平（非活动状态）。
+> 3. 使用电池供电时，**GPIO10 必须设置为高电平**。如果电路板通过 USB 供电，则可以忽略此要求。
 
 ## 快速开始
+
+> 完整开发指南（Arduino 环境配置、PlatformIO 配置、LVGL 教程及外设示例代码）请参阅 [T-Deck 快速上手指南](quick-start.md)。
 
 ### 示例支持
 
@@ -162,6 +167,171 @@ LILYGO T-Deck 是一款基于 ESP32-S3 的多功能嵌入式开发平台，搭�
 #define BOARD_GPS_RX_PIN    44
 ```
 
+## 外设初始化代码
+
+以下代码片段展示了使用上述引脚定义初始化各外设的最小配置。将 [引脚映射](#引脚映射) 中的 `#define` 代码块复制到你的程序中，然后使用相应的初始化片段。
+
+> **所有 SPI 操作前** — 先将其他 CS 线拉高：
+> ```cpp
+> digitalWrite(BOARD_SDCARD_CS, HIGH);
+> digitalWrite(BOARD_TFT_CS,    HIGH);
+> digitalWrite(RADIO_CS_PIN,    HIGH);
+> ```
+
+### 电源使能（电池供电时必须）
+
+```cpp
+// 电池供电时必须设为 HIGH；USB 供电时调用也无害
+pinMode(BOARD_POWERON, OUTPUT);
+digitalWrite(BOARD_POWERON, HIGH);
+```
+
+### 屏幕（ST7789 — Arduino_GFX）
+
+```cpp
+#include <Arduino_GFX_Library.h>
+
+Arduino_DataBus *bus = new Arduino_ESP32SPI(
+    BOARD_TFT_DC, BOARD_TFT_CS,
+    BOARD_SPI_SCK, BOARD_SPI_MOSI, BOARD_SPI_MISO);
+
+// 320×240，无 RST 引脚 (-1)，竖屏
+Arduino_GFX *gfx = new Arduino_ST7789(bus, -1, 0, true, 320, 240);
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    gfx->begin();
+    gfx->fillScreen(BLACK);
+}
+```
+
+### 屏幕（ST7789 — TFT_eSPI）
+
+> 需要为 T-Deck 配置 `User_Setup.h` — 参考 [2024-07-26 提交](https://github.com/Xinyuan-LilyGO/T-Deck/commit/6adb8884c689f174c29a6d7172a0daa367a582eb) 获取正确的初始化序列。
+
+```cpp
+#include <TFT_eSPI.h>
+
+TFT_eSPI tft;
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    tft.init();
+    tft.setRotation(1);
+    tft.fillScreen(TFT_BLACK);
+}
+```
+
+### LoRa（SX1262 — RadioLib）
+
+```cpp
+#include <RadioLib.h>
+
+SX1262 radio = new Module(
+    RADIO_CS_PIN,   // CS
+    RADIO_DIO1_PIN, // DIO1 / IRQ
+    RADIO_RST_PIN,  // RST
+    RADIO_BUSY_PIN  // BUSY
+);
+
+void setup() {
+    // 先禁用其他 SPI 设备
+    pinMode(BOARD_SDCARD_CS, OUTPUT); digitalWrite(BOARD_SDCARD_CS, HIGH);
+    pinMode(BOARD_TFT_CS,    OUTPUT); digitalWrite(BOARD_TFT_CS,    HIGH);
+
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI);
+
+    // frequency (MHz), bandwidth (kHz), spreading factor, coding rate, sync word, output power (dBm)
+    int state = radio.begin(915.0, 125.0, 7, 5, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22);
+    if (state != RADIOLIB_ERR_NONE) {
+        Serial.printf("LoRa 初始化失败: %d\n", state);
+    }
+}
+```
+
+### 键盘（I²C）
+
+```cpp
+#include <Wire.h>
+
+#define KEYBOARD_ADDR 0x55
+
+void setup() {
+    Wire.begin(BOARD_I2C_SDA, BOARD_I2C_SCL);
+    pinMode(BOARD_KEYBOARD_INT, INPUT_PULLUP);
+}
+
+// 轮询或使用中断 — 每次按键读取一个字节
+void loop() {
+    if (digitalRead(BOARD_KEYBOARD_INT) == LOW) {
+        Wire.requestFrom(KEYBOARD_ADDR, 1);
+        if (Wire.available()) {
+            char key = Wire.read();
+            Serial.printf("按键: %c\n", key);
+        }
+    }
+}
+```
+
+### 轨迹球
+
+```cpp
+// 轨迹球在四个 GPIO 上输出正交脉冲信号
+// 使用中断检测移动方向
+void setup() {
+    pinMode(BOARD_TBOX_G01, INPUT);
+    pinMode(BOARD_TBOX_G02, INPUT);
+    pinMode(BOARD_TBOX_G03, INPUT);
+    pinMode(BOARD_TBOX_G04, INPUT);
+}
+```
+
+### 麦克风（ES7210 — I²S）
+
+> 启用麦克风后，**GPIO0（BOOT / 轨迹球中间按键）不可用**。
+
+```cpp
+#include <driver/i2s.h>
+
+void setup() {
+    i2s_config_t i2s_config = {
+        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
+        .sample_rate = 16000,
+        .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+        .communication_format = I2S_COMM_FORMAT_STAND_I2S,
+        .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
+        .dma_buf_count = 4,
+        .dma_buf_len = 256,
+        .use_apll = false,
+    };
+    i2s_pin_config_t pin_config = {
+        .mck_io_num   = BOARD_ES7210_MCLK,
+        .bck_io_num   = BOARD_ES7210_SCK,
+        .ws_io_num    = BOARD_ES7210_LRCK,
+        .data_in_num  = BOARD_ES7210_DIN,
+        .data_out_num = I2S_PIN_NO_CHANGE,
+    };
+    i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
+    i2s_set_pin(I2S_NUM_0, &pin_config);
+}
+```
+
+### SD 卡（SPI）
+
+```cpp
+#include <SD.h>
+
+void setup() {
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI);
+    if (!SD.begin(BOARD_SDCARD_CS)) {
+        Serial.println("SD 卡初始化失败");
+    }
+}
+```
+
 ## 尺寸图
 
 ## 原理图
@@ -170,9 +340,9 @@ LILYGO T-Deck 是一款基于 ESP32-S3 的多功能嵌入式开发平台，搭�
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [T-Deck ANT 868-915MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20868-915MHZ.pdf.pdf)
-* [T-Deck ANT 433MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20433MHZ.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [T-Deck ANT 868-915MHz](/datasheet/T-Deck%20ANT%20868-915MHZ.pdf)
+* [T-Deck ANT 433MHz](/datasheet/T-Deck%20ANT%20433MHZ.pdf)
 
 ## 软件开发
 

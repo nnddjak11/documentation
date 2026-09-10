@@ -4,11 +4,14 @@ show_source: false
 tags: ESP32-S3, SIM7670G, 4G, LTE Cat-1, GPS, IoT, Cellular
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-sim7670g-s3" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-sim-7670g-s3" />
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-1.jpg', alt: 'T-SIM7670G-S3 front view' },
   { src: '/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-2.jpg', alt: 'T-SIM7670G-S3 back view' },
+  { src: '/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-3.jpg', alt: 'T-SIM7670G-S3 dimensions' },
+  { src: '/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-info-1.jpg', alt: 'T-SIM7670G-S3 specifications part 1' },
+  { src: '/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-info-2.jpg', alt: 'T-SIM7670G-S3 specifications part 2' },
 ]" />
 
 ## Overview
@@ -90,6 +93,34 @@ LILYGO T-SIM7670G-S3 combines the **ESP32-S3** dual-core LX7 microcontroller wit
 | Battery | 3.7 V Li-Po connector with charging |
 | Antenna | LTE IPEX + GPS IPEX |
 
+![T-SIM7670G-S3 Specifications Part 1](/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-info-1.jpg)
+
+![T-SIM7670G-S3 Specifications Part 2](/products/t-sim-series/t-sim7670g-s3/index/image/t-sim7670g-s3-info-2.jpg)
+
+## Electrical Parameters
+
+| Feature | Details |
+| :-- | :-- |
+| USB-C Input Voltage | 5 V |
+| Solar Input Voltage | 5 V - 6 V |
+| USB-C / Solar Charge Max Current | 500 mA |
+| Battery Voltage | 3.7 V |
+| VBUS pin header | 5 V |
+| VBAT pin header | 4.2 V |
+
+> The onboard JST2.0 interface is only for solar-panel battery charging and cannot power the board directly. VBUS is tied to the USB-C input and is for external power input only. The USB/VBUS input should provide at least 2 A peak current and stay above 5 V to avoid low-voltage shutdown.
+
+### Battery Protector
+
+| Feature | Details |
+| :-- | :-- |
+| Over-Voltage Threshold | 4.30 V |
+| Under-Voltage Threshold | 2.5 V |
+| Over-Discharge Current | 3 A |
+| Chip | DW01V |
+
+> The board may reset when switching between USB and battery power because it does not have seamless power switching.
+
 ## Pin Diagram
 
 ### SIM7670G UART
@@ -107,12 +138,12 @@ LILYGO T-SIM7670G-S3 combines the **ESP32-S3** dual-core LX7 microcontroller wit
 
 ## Schematic
 
-- [LilyGo-Modem-Series GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/LilyGo-Modem-Series/tree/master/hardware)
+- [LilyGo-Modem-Series GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/LilyGo-Modem-Series/tree/main/schematic)
 
 ## Datasheet
 
-- [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [SIM7670G Hardware Design](https://simcom.ee/documents/?dir=SIM767x)
+- [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+- [SIM7670G Hardware Design](/datasheet/SIM7672X_Series_Hardware_Design_V1.02.pdf)
 
 ## Software Libraries
 

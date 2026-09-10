@@ -4,11 +4,13 @@ show_source: false
 tags: ESP32-S3, Round Display, GC9A01, Rotary Encoder, Wi-Fi, Bluetooth, IoT
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-encoder" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-encoder-esp32" />
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-1.jpg', alt: 'T-Encoder front view' },
   { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-2.jpg', alt: 'T-Encoder back view' },
+  { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-3.jpg', alt: 'T-Encoder dimensions' },
+  { src: '/products/t-encoder-series/t-encoder/index/image/t-encoder-info.jpg', alt: 'T-Encoder specifications' },
 ]" />
 
 ## Overview
@@ -84,7 +86,11 @@ LILYGO T-Encoder is a compact ESP32-S3 development board combining a **1.28-inch
 | USB | 1 × USB-C |
 | Expansion | 1 × QWIIC |
 
+![T-Encoder Specifications](/products/t-encoder-series/t-encoder/index/image/t-encoder-info.jpg)
+
 ## Pin Diagram
+
+![T-Encoder Pinout](/products/t-encoder-series/t-encoder/index/image/t-encoder-pinout.jpg)
 
 ### Display (GC9A01)
 
@@ -111,12 +117,12 @@ LILYGO T-Encoder is a compact ESP32-S3 development board combining a **1.28-inch
 
 ## Schematic
 
-- [T-Encoder GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/T-Encoder/tree/master/hardware)
+- [T-Encoder GitHub Repository (hardware)](https://github.com/Xinyuan-LilyGO/T-Encoder)
 
 ## Datasheet
 
-- [ESP32-S3 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [GC9A01 Datasheet](https://www.buydisplay.com/download/ic/GC9A01A.pdf)
+- [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+- [GC9A01 Datasheet](/datasheet/GC9A01A.pdf)
 
 ## Software Libraries
 
@@ -124,7 +130,6 @@ LILYGO T-Encoder is a compact ESP32-S3 development board combining a **1.28-inch
 
 ### Dependent Libraries
 
-- [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 - [Arduino_GFX](https://github.com/moononournation/Arduino_GFX)
 - [RotaryEncoder](http://www.mathertel.de/Arduino/RotaryEncoderLibrary.aspx)
 - [LVGL](https://github.com/lvgl/lvgl)
@@ -135,7 +140,7 @@ LILYGO T-Encoder is a compact ESP32-S3 development board combining a **1.28-inch
   A. Use the RotaryEncoder library, monitoring GPIO4 (A) and GPIO5 (B). The library handles debounce and direction detection automatically.
 
 * **Q. Can I use LVGL with the round GC9A01 display?**
-  A. Yes. LVGL works with the GC9A01 driver. Define the display resolution as 240 × 240 and set the `GC9A01_DRIVER` flag in your TFT_eSPI `User_Setup.h`.
+ A. Yes. LVGL works with the GC9A01 driver. Define the display resolution as 240 × 240 and use the GC9A01 profile or the official display helper.
 
 ## Changelog
 

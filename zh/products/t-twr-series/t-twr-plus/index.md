@@ -9,6 +9,8 @@ tags: ESP32-S3, SA868, VHF, UHF, Walkie-Talkie, GPS, OLED, Radio, APRS
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-twr-series/t-twr-plus/index/image/t-twr-plus-1.jpg', alt: 'T-TWR-Plus 正面图' },
   { src: '/products/t-twr-series/t-twr-plus/index/image/t-twr-plus-2.jpg', alt: 'T-TWR-Plus 背面图' },
+  { src: '/products/t-twr-series/t-twr-plus/index/image/t-twr-plus-3.jpg', alt: 'T-TWR-Plus 尺寸图' },
+  { src: '/products/t-twr-series/t-twr-plus/index/image/t-twr-plus-info.jpg', alt: 'T-TWR-Plus 规格参数' },
 ]" />
 
 ## 概述
@@ -60,6 +62,16 @@ LILYGO T-TWR-Plus 是一款可编程对讲机开发板，基于 **ESP32-S3-WROOM
 | GNSS | L76K |
 | 存储 | TF 卡槽 |
 | 电池 | 21700 锂离子电池座 |
+
+![T-TWR-Plus 规格参数](/products/t-twr-series/t-twr-plus/index/image/t-twr-plus-info.jpg)
+
+## 功耗参考
+
+| 硬件版本 | 模式 / 测试固件 | 电流 |
+| :-- | :-- | :-- |
+| T-TWR Rev2.1 | 深度睡眠 / `Factory` 示例 | 约 680 µA |
+
+> 数据来自[官方 T-TWR 仓库](https://github.com/Xinyuan-LilyGO/T-TWR#faq)。无线电发射电流明显更高，并随发射功率档位变化；请使用能够满足峰值电流需求的电池。
 
 ## 软件开发
 

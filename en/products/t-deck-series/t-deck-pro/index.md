@@ -21,6 +21,8 @@ Suitable for IoT, outdoor devices, smart terminals, environmental monitoring, an
 
 ## Quick Start
 
+> **Note for MeshCore users on V1.1:** Since version 1.1 has several hardware configuration and touch chip updates, please join the [MeshCore Discord](https://meshcore.gg/) and enter the **#ripple-gui** channel — the MeshCore team can directly assist you there.
+
 ### Example Support
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
@@ -185,11 +187,12 @@ Suitable for IoT, outdoor devices, smart terminals, environmental monitoring, an
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## Software Development
 
 * [T-Deck-Pro GitHub Repository](https://github.com/Xinyuan-LilyGO/T-Deck-Pro)
+* [Quick Start Guide](quick-start.md)
 
 ### Dependent Libraries
 

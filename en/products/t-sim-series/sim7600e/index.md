@@ -1,7 +1,7 @@
 ---
 title: T-PCIE SIM7600E
 show_source: false
-tags: LTE, SIM7600E, 4G, mini PCIe, GNSS
+tags: SIM7600E, LTE, 4G, mini PCIe, GNSS
 ---
 
 # {{ $frontmatter.title }}
@@ -13,7 +13,9 @@ tags: LTE, SIM7600E, 4G, mini PCIe, GNSS
 
 ## Overview
 
-T-PCIE SIM7600E is a mini PCIe form-factor **LTE Cat 1** communication module based on the **SIM7600E** chip. Supports LTE-TDD/FDD, HSPA+, GSM/GPRS/EDGE multi-mode wireless communication with maximum downlink 10 Mbps / uplink 5 Mbps. Integrates multi-constellation GNSS, built-in network protocols (TCP/IP/UDP/HTTP/HTTPS/FTP/FTPS), and USB drivers for Windows/Linux/Android. Suitable for telematics, surveillance equipment, CPE, industrial routers, and remote diagnostics.
+T-PCIE SIM7600E is a **mini PCIe form-factor LTE modem module** based on the **SIM7600E** chip, designed to be inserted into the [T-PCIE mainboard](../index.md) mPCIe slot. Supports LTE-FDD/LTE-TDD, HSPA+, GSM/GPRS/EDGE multi-mode wireless communication with maximum downlink 10 Mbps / uplink 5 Mbps. Integrates multi-constellation GNSS and built-in TCP/IP/HTTP/HTTPS/FTP protocol stack. AT commands are compatible with the SIM7600 series.
+
+> For mainboard hardware details (DIP switch, pin map, electrical parameters, buttons, LED, antenna), see the [T-PCIE mainboard page](../index.md).
 
 ## Quick Start
 
@@ -21,19 +23,8 @@ T-PCIE SIM7600E is a mini PCIe form-factor **LTE Cat 1** communication module ba
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
 | :-----: | :----------------: | :-----: | :---------: |
-| [T-PCIE Examples](https://github.com/Xinyuan-LilyGO/LilyGo-T-PCIE) | ✓ | | LTE communication examples |
+| [LilyGo-Modem-Series](https://github.com/Xinyuan-LilyGO/LilyGo-Modem-Series) | ✓ | | AT commands, MQTT, HTTP examples |
 
-### PlatformIO
-
-1. Install [Visual Studio Code](https://code.visualstudio.com/) and [Python](https://www.python.org/)
-2. Search for and install the **PlatformIO IDE** extension in VS Code
-3. Clone the [LilyGo-T-PCIE](https://github.com/Xinyuan-LilyGO/LilyGo-T-PCIE) repository
-4. Open `platformio.ini` and uncomment the desired example
-5. Click **✓** to compile, click **→** to upload
-
-### Arduino
-
-Refer to the mainboard Quick Start guide for Arduino board settings.
 
 ### Development Platforms
 
@@ -41,34 +32,47 @@ Refer to the mainboard Quick Start guide for Arduino board settings.
 2. [Arduino IDE](https://www.arduino.cc/en/software)
 3. [ESP-IDF](https://www.espressif.com/en/products/sdks/esp-idf)
 
-## Video
+## Related Videos
 
 ## Key Features
 
-- SIM7600E: LTE Cat 1, LTE-FDD B1/B3/B5/B8/B20, GSM 900/1800 MHz
-- Max 10 Mbps DL / 5 Mbps UL
-- Integrated GNSS (multi-constellation)
-- USB drivers: Windows/Linux/Android
-- Supported protocols: TCP/IP/IPv4/IPv6/HTTP/HTTPS/FTP/FTPS
+- SIM7600E LTE Cat-4, mini PCIe form factor
+- LTE-FDD B1/B3/B5/B8/B20, GSM 900/1800 MHz
+- Max 10 Mbps downlink / 5 Mbps uplink
+- Integrated multi-constellation GNSS
+- Built-in TCP/IP, HTTP/HTTPS, FTP/FTPS protocol stack
+- USB 2.0 interface, Windows/Linux/Android drivers
+- AT commands compatible with SIM7600 series
 
-## Product Parameters
+## Modem Specifications
 
 | Feature | Specification |
-| :------------------------------: | :------------------------------: |
-| Module | SIM7600E-PCIE |
+| :-----: | :-----------: |
+| Module | SIM7600E |
 | Form Factor | mini PCIe |
-| Standard | LTE Cat 1 |
+| Standard | LTE Cat-4 |
 | LTE-FDD | B1/B3/B5/B8/B20 |
-| GSM | 900/1800 MHz |
-| Downlink | Max 10 Mbps |
-| Uplink | Max 5 Mbps |
+| GSM | 900 / 1800 MHz |
+| Max Downlink | 10 Mbps |
+| Max Uplink | 5 Mbps |
 | GNSS | Multi-constellation |
-| USB | USB 2.0 |
-| SIM | Nano SIM |
+| Interface | UART, USB 2.0, GPIO |
+| AT Commands | Compatible with SIM7600 series |
+| SIM Card | Nano SIM (via mainboard slot) |
+
+> **Regional coverage:** SIM7600E covers Europe, Middle East, Africa, South Korea, and Thailand. For other regions, see the modem differences table below.
+
+## Modem Differences
+
+| Model | GPS | Phone Call | SMS | Frequency Band |
+| :---: | :-: | :--------: | :-: | :------------- |
+| SIM7600E | ✅ | ✅ | ✅ | LTE-FDD: B1/B3/B5/B8/B20; GSM: 900/1800 MHz |
+
+> Voice call requires an onboard audio decoder chip. Send `AT+SIMCOMATI` to check your module's hardware version. The SIM7600 series only has voice call functionality if a chip is present in the audio decoder area (red-marked zone on the PCB). If that area is empty, voice calls are not supported.
 
 ## Pin Diagram
 
-<img src="/products/t-sim-series/sim7600e/index/image/sim7600e-1.jpg" alt="T-PCIE SIM7600E pin definition" width=60%>
+<img src="/products/t-sim-series/sim7600e/index/image/sim7600e-1.jpg" alt="SIM7600E pin definition" width="60%">
 
 ## Dimension Diagram
 
@@ -78,21 +82,34 @@ Refer to the mainboard Quick Start guide for Arduino board settings.
 
 ## Datasheet
 
-* [SIM7600E Datasheet](https://github.com/Xinyuan-LilyGO/LilyGoLib/blob/master/Files/T-SIM7600E-PCIE.pdf)
+* [SIM7600E Datasheet](/datasheet/T-SIM7600X-V1.3.pdf)
+* [SIMCOM SIM7600X Official Page](https://cn.simcom.com/product/SIM7600X.html)
 
 ## Software Development
 
-* [LilyGo-T-PCIE GitHub Repository](https://github.com/Xinyuan-LilyGO/LilyGo-T-PCIE)
+* [LilyGo-Modem-Series GitHub Repository](https://github.com/Xinyuan-LilyGO/LilyGo-Modem-Series)
 
 ### Dependent Libraries
 
+* [TinyGSM](https://github.com/vshymanskyy/TinyGSM)
+* [XPowersLib](https://github.com/lewisxhe/XPowersLib)
+
 ## FAQ
 
-* **Q. Which regions is SIM7600E compatible with?**
-  A. SIM7600E covers Europe, Middle East, Africa, South Korea, and Thailand frequency bands (LTE-FDD B1/B3/B5/B8/B20).
+* **Q. Which regions does SIM7600E cover?**
+  A. Europe, Middle East, Africa, South Korea, and Thailand (LTE-FDD B1/B3/B5/B8/B20, GSM 900/1800 MHz).
+
+* **Q. Does SIM7600E support voice calls?**
+  A. Only if the board has an onboard audio decoder chip. Send `AT+SIMCOMATI` to check. If the audio area is empty, voice calls are not possible.
+
+* **Q. Which GPS antenna is compatible?**
+  A. Use an active GPS antenna with 3.3 V supply (IPEX Gen-1 connector). Most active GPS antennas supporting 2.5–5.5 V are compatible.
+
+* **Q. For mainboard-related issues (upload failure, SIM not detected, power switching).**
+  A. See the [T-PCIE mainboard FAQ](../index.md#faq).
 
 ## Version History
 
-| Version | Release Date | Update Description |
-| :-----: | :----------: | :----------------: |
-| T-PCIE SIM7600E V1.0 | — | Initial version |
+| Version | Date | Notes |
+| :-----: | :--: | :---- |
+| T-PCIE V1.2 | — | Current version |

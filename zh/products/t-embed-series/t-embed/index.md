@@ -9,6 +9,8 @@ tags: ESP32-S3, TFT, 旋转编码器, APA102, 扬声器, MicroSD, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-embed-series/t-embed/index/image/t-embed-1.jpg', alt: 'T-Embed 正面' },
   { src: '/products/t-embed-series/t-embed/index/image/t-embed-2.jpg', alt: 'T-Embed 背面' },
+  { src: '/products/t-embed-series/t-embed/index/image/t-embed-3.jpg', alt: 'T-Embed 尺寸图' },
+  { src: '/products/t-embed-series/t-embed/index/image/t-embed-info.jpg', alt: 'T-Embed 规格参数' },
 ]" />
 
 ## 概述
@@ -93,9 +95,11 @@ LILYGO T-Embed 是一款多功能 ESP32-S3 开发平台，配备 **1.9 英寸 ST
 | 扩展 | 2 × QWIIC |
 | 尺寸 | 95.4 × 36.4 mm |
 
+![T-Embed 规格参数](/products/t-embed-series/t-embed/index/image/t-embed-info.jpg)
+
 ## 引脚图
 
-<!-- GPIO 映射表。 -->
+![T-Embed 引脚图](/products/t-embed-series/t-embed/index/image/t-embed-pinout.jpg)
 
 ## 尺寸图
 
@@ -103,11 +107,11 @@ LILYGO T-Embed 是一款多功能 ESP32-S3 开发平台，配备 **1.9 英寸 ST
 
 ## 原理图
 
-- [T-Embed GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/T-Embed/tree/master/hardware)
+- [T-Embed GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/T-Embed/tree/main/schematic)
 
 ## 数据手册
 
-- [ESP32-S3 数据手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+- [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## 软件库
 
@@ -115,7 +119,6 @@ LILYGO T-Embed 是一款多功能 ESP32-S3 开发平台，配备 **1.9 英寸 ST
 
 ### 依赖库
 
-- [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 - [FastLED](https://github.com/FastLED/FastLED)
 - [ESP32-audioI2S](https://github.com/schreibfaul1/ESP32-audioI2S)
 - [LVGL](https://github.com/lvgl/lvgl)

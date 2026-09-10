@@ -4,11 +4,12 @@ show_source: false
 tags: ESP32, USB Dongle, TFT, Wi-Fi, Bluetooth, IoT
 ---
 
-# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-dongle" />
+# {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-dongle-esp32-s2-1-14-inch-lcd-board" />
 
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-dongle-series/t-dongle/index/image/t-dongle-1.jpg', alt: 'T-Dongle front view' },
   { src: '/products/t-dongle-series/t-dongle/index/image/t-dongle-2.jpg', alt: 'T-Dongle back view' },
+  { src: '/products/t-dongle-series/t-dongle/index/image/t-dongle-3.jpg', alt: 'T-Dongle dimensions' },
 ]" />
 
 ## Overview
@@ -21,7 +22,7 @@ LILYGO T-Dongle is a compact ESP32-based USB dongle development board. Built aro
 
 | Example | PlatformIO/Arduino | ESP-IDF | Description |
 | :-----: | :----------------: | :-----: | :---------: |
-| [T-Dongle](https://github.com/LilyGO/T-Dongle) | ✓ | | Display, TF card, LED examples |
+| [T-Dongle](https://github.com/Xinyuan-LilyGO/T-Dongle-ESP32S2) | ✓ | | Display, TF card, LED examples |
 
 ### PlatformIO
 
@@ -82,19 +83,21 @@ LILYGO T-Dongle is a compact ESP32-based USB dongle development board. Built aro
 | Storage | TF card slot |
 | USB | USB Type-A plug |
 | Input Voltage | 5 V via USB |
-| Dimensions | <!-- PCB dimensions --> |
+| Dimensions | 58 × 18 × 9 mm |
+
+![T-Dongle Specifications](/products/t-dongle-series/t-dongle/index/image/t-dongle-info.jpg)
 
 ## Pin Diagram
 
-<!-- GPIO mapping table. -->
+![T-Dongle Pinout](/products/t-dongle-series/t-dongle/index/image/t-dongle-pinout.jpg)
 
 ## Dimensions
 
-<!-- PCB and enclosure dimension diagrams. -->
+![T-Dongle Dimensions Diagram](/products/t-dongle-series/t-dongle/index/image/t-dongle-3.jpg)
 
 ## Schematic
 
-- [LilyGO T-Dongle GitHub Repository](https://github.com/LilyGO/T-Dongle)
+- [LilyGO T-Dongle GitHub Repository](https://github.com/Xinyuan-LilyGO/T-Dongle-ESP32S2)
 
 ## Datasheet
 
@@ -102,7 +105,7 @@ LILYGO T-Dongle is a compact ESP32-based USB dongle development board. Built aro
 
 ## Software Libraries
 
-- [LilyGO T-Dongle GitHub Repository](https://github.com/LilyGO/T-Dongle)
+- [LilyGO T-Dongle GitHub Repository](https://github.com/Xinyuan-LilyGO/T-Dongle-ESP32S2)
 
 ## FAQ
 

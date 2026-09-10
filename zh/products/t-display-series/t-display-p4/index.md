@@ -22,6 +22,35 @@ T-Display-P4 是一款基于 **ESP32-P4** 高性能核心的多功能开发板�
 4. **丰富外设**：集成扬声器、麦克风、线性振动马达、LoRa、GPS、摄像头、电池监测等模块。
 5. **扩展性强**：提供丰富 GPIO 接口，支持键盘扩展板（T-Display-P4-Keyboard）。
 
+## 硬件注意事项
+
+T-Display-P4 的 **RST** 按键复位的是 ESP32-P4 主控，并不是整板电源复位。板上的部分外设电源由 XL9535 等 IO 扩展器控制，单独复位 ESP32-P4 后，这些外设不一定会重新完成一次完整的断电上电流程。
+
+如果设备开机后进入下载模式、无法正常启动，或按下 **RST** 后仍不能恢复，请先将电源开关关闭，等待板上电容放电后再重新开机。开机过程中不要按住 **BOOT**；**BOOT** 可能会让 ESP32-P4 进入下载模式，设备看起来会像没有正常启动。
+
+### USB-C 端口使用限制
+
+T-Display-P4 底部有两个 USB-C 端口，但功能不同：
+
+| 端口 | 用途 | 注意事项 |
+| :--: | :-- | :-- |
+| 右侧 `P4.U` | ESP32-P4 数据传输、固件烧录、串口终端 | 使用串口终端程序时请关闭 RTS / 硬件流控。RTS 线会触发 P4 复位，可能导致设备复位后卡死或无法正常运行。 |
+| 左侧 USB-C | 充电 / 供电 | 不用于数据传输或固件烧录。 |
+
+### LoRa 外置天线切换警告
+
+在软件中将 LoRa 从内置天线切换到外置天线前，必须先将附带的偶极天线连接到 **MMCX 1** 接口。不要在未连接外置天线的情况下启用外置天线模式，否则可能损坏 SX1262 LoRa 芯片。
+
+<img src="/products/t-display-series/t-display-p4/index/image/t-display-p4-antenna-ports.png" alt="T-Display P4 天线接口" width=70%>
+
+<img src="/products/t-display-series/t-display-p4/index/image/t-display-p4-antenna-settings.png" alt="T-Display P4 天线设置" width=70%>
+
+### 键盘扩展板安装注意事项
+
+T-Display-P4-Keyboard 通过小尺寸子板和 Pogo Pin 与 P4 主机连接。安装前请先断电，并使用镊子、放大镜等工具辅助对位。安装时重点检查子板针脚是否垂直、是否弯曲、是否真正进入插座孔内，避免针脚滑到插座外侧。
+
+如果屏幕出现 `xl9555 init fail` 或大量 `init fail` 初始化失败提示，通常应先检查键盘子板和侧边 QWIIC / 扩展接口是否对准并完全接触，再重新上电测试。
+
 ## 快速开始
 
 ### 示例支持
@@ -31,16 +60,8 @@ T-Display-P4 是一款基于 **ESP32-P4** 高性能核心的多功能开发板�
 | 示例 | ESP-IDF | 描述 |
 | :------ | :-----: | :---------- |
 | [afe](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/afe) | ✓ | 音频前端 |
-| [aw86224](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/aw86224) | ✓ | 振动马达 |
-| [bq27220](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/bq27220) | ✓ | 电量监测 |
-| [deep_sleep](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/deep_sleep) | ✓ | 深度睡眠 |
-| [es8311](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/es8311) | ✓ | 音频编解码器 |
-| [l76k](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/l76k) | ✓ | GPS 定位 |
-| [lvgl_9_ui](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/lvgl_9_ui) | ✓ | 出厂示例 |
-| [screen_camera](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/screen_camera) | ✓ | 摄像头屏幕显示 |
+| [es8311_sd_wav](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/es8311_sd_wav) | ✓ | 音频编解码与 SD 卡 WAV 播放 |
 | [sx1262_lora_send_receive](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/sx1262_lora_send_receive) | ✓ | LoRa 收发 |
-| [icm20948](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/icm20948) | ✓ | 惯性传感器 |
-| [pcf8563](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/pcf8563) | ✓ | RTC 时钟 |
 | [xiaozhi](https://github.com/78/xiaozhi-esp32) | ✓ | 小智 AI |
 
 #### T-Display-P4-Keyboard 扩展板示例
@@ -49,7 +70,7 @@ T-Display-P4 是一款基于 **ESP32-P4** 高性能核心的多功能开发板�
 | :------ | :-----: | :---------- |
 | [radiolib_cc1101_send_receive](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/keyboard_examples/radiolib_cc1101_send_receive) | ✓ | CC1101 收发 |
 | [radiolib_nrf24l01_send_receive](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/keyboard_examples/radiolib_nrf24l01_send_receive) | ✓ | NRF24L01 收发 |
-| [st25r3916](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/keyboard_examples/st25r3916) | ✓ | NFC 测试 |
+| [st25r3916](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/keyboard_examples/nfc-rfal_st25r3916) | ✓ | NFC 测试 |
 | [tca8418](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/keyboard_examples/tca8418) | ✓ | 键盘测试 |
 
 ### ESP-IDF（VS Code）
@@ -107,7 +128,7 @@ T-Display-P4 是一款基于 **ESP32-P4** 高性能核心的多功能开发板�
 | 电量监测 | BQ27220 (I²C) |
 | IO 扩展 | XL9535 (I²C) |
 | 无线 | Wi-Fi 6 + 蓝牙 5.3（通过 ESP32-C6） |
-| USB | 1 × TYPE-C |
+| USB | 2 × USB-C（右侧 `P4.U` 用于数据 / 烧录，左侧用于充电 / 供电） |
 
 ## 引脚图
 
@@ -121,10 +142,6 @@ T-Display-P4 有 AMOLED、TFT 两个版本：
 
 <img src="/products/t-display-series/t-display-p4/index/image/t-display-p4-tft.jpg" alt="T-Display-P4 TFT 引脚图" width=100%>
 
-引脚定义请参考配置文件：
-- [t_display_p4_config.h](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/components/private_library/t_display_p4_config.h)
-- [t_display_p4_keyboard_config.h](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/components/private_library/t_display_p4_keyboard_config.h)
-
 ## 尺寸图
 
 ## 原理图
@@ -133,14 +150,14 @@ T-Display-P4 有 AMOLED、TFT 两个版本：
 
 ## 数据手册
 
-* [ESP32-P4 Datasheet](https://www.espressif.com/en/support/documents/technical-documents)
-* [ESP32-C6-MINI-1U Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-c6-mini-1_mini-1u_datasheet_en.pdf)
-* [SX1262 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/DS_SX1261-2_V2_1.pdf)
-* [ES8311 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/ES8311.pdf)
-* [ICM20948 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/ICM20948.pdf)
-* [BQ27220 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/bq27220_en.pdf)
-* [L76K Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/L76KB-A58.pdf)
-* [PCF8563 Datasheet](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/information/PCF8563.pdf)
+* [ESP32-P4 Datasheet](/datasheet/esp32-p4_datasheet_en.pdf)
+* [ESP32-C6-MINI-1U Datasheet](/datasheet/esp32-c6-mini-1_mini-1u_datasheet_en.pdf)
+* [SX1262 Datasheet](/datasheet/DS_SX1261-2_V2_1.pdf)
+* [ES8311 Datasheet](/datasheet/ES8311.pdf)
+* [ICM20948 Datasheet](/datasheet/ICM20948.pdf)
+* [BQ27220 Datasheet](/datasheet/bq27220_en.pdf)
+* [L76K Datasheet](/datasheet/L76KB-A58.pdf)
+* [PCF8563 Datasheet](/datasheet/PCF8563.pdf)
 
 ## 软件开发
 
@@ -167,13 +184,27 @@ T-Display-P4 有 AMOLED、TFT 两个版本：
   A. 确保设备在室外或信号良好处测试，并烧录最新固件。
 
 * **Q. 关机无法充电或续航严重缩水？**  
-  A. 出厂固件最多使用 3-5 小时，未加入睡眠功能。参考[睡眠示例](https://github.com/Xinyuan-LilyGO/T-Display-P4/tree/main/main/examples/deep_sleep)添加深度睡眠。
+  A. 出厂固件最多使用 3-5 小时，未加入睡眠功能。如需延长续航，可自行添加深度睡眠功能。
 
 * **Q. OLED 屏幕出现波浪纹？**  
   A. 若低电量时波纹更明显，基本与电池相关；若电量充足仍出现，需检查屏幕供电回路。
 
-* **Q. 关于天线接口与 GPS 定位问题？**  
-  A. 当前 SX1262 版本外壳上的两个天线接口只有一个有接线，只能用一个天线接口。
+* **Q. 屏幕上出现很多 `init fail` 初始化失败提示？**  
+  A. 通常是侧边 QWIIC / 扩展接口连接器或键盘子板没有插好导致外设初始化失败。请先断电，检查连接器是否完全插入、是否偏斜、Pogo Pin 是否对准插座孔、针脚是否弯曲或松动，再重新上电测试。
+
+  <img src="/products/t-display-series/t-display-p4/index/image/t-display-p4-qwiic-connector.png" alt="T-Display P4 QWIIC 连接器检查位置" width=100%>
+
+* **Q. 使用外置 LoRa 天线时需要注意什么？**  
+  A. 将 LoRa 设置切换到外置天线前，必须先把附带的偶极天线连接到 **MMCX 1**。未接外置天线时不要启用外置天线模式，否则可能损坏 SX1262 LoRa 芯片。
+
+* **Q. 两个 USB-C 端口都能烧录固件吗？**  
+  A. 不能。右侧 `P4.U` 端口用于数据传输和固件烧录；左侧 USB-C 仅用于充电 / 供电。使用串口终端程序连接 `P4.U` 时，请关闭 RTS / 硬件流控。
+
+* **Q. 键盘测试应用中按键输出不对？**  
+  A. 已知反馈：`Shift + h` 应输出逗号 `,`，但部分键盘测试应用版本会输出撇号 `'`，且 `'` 键位置异常。请更新到后续修正版本的键盘测试固件或应用。
+
+* **Q. ESP32-C6 无法连接 Wi-Fi？**  
+  A. 请先按照快速开始中的 C6 烧录流程更新 ESP32-C6 协处理器固件，再将 ESP32-P4 主控刷回出厂固件或正常应用固件。如果最新固件仍无法连接 Wi-Fi，请记录 C6 固件版本、P4 固件版本和连接日志反馈。
 
 * **Q. 电量显示不准？**  
   A. 在固件中设置 `set_design_capacity` 参数为 1000mAh，然后完成满电→自然放电至关机→再充满电的循环，电量芯片会自动校准。

@@ -118,7 +118,7 @@ LILYGO T-Display Bar is a highly integrated embedded smart display module based 
 
 ## Datasheet
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
 
 ## Software Development
 
@@ -126,7 +126,6 @@ LILYGO T-Display Bar is a highly integrated embedded smart display module based 
 
 ### Dependent Libraries
 
-* [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI)
 * [lvgl](https://github.com/lvgl/lvgl)
 * [SensorsLib](https://github.com/lewisxhe/SensorsLib)
 * [XPowersLib](https://github.com/lewisxhe/XPowersLib)

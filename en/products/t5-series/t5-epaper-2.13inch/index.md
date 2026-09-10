@@ -9,6 +9,7 @@ tags: ESP32, E-Paper, 2.13inch, SSD1680, Wi-Fi, Bluetooth, Ultra-Low-Power, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t5-series/t5-epaper-2.13inch/index/image/t5-epaper-2.13inch-1.jpg', alt: 'T5 ePaper 2.13inch front view' },
   { src: '/products/t5-series/t5-epaper-2.13inch/index/image/t5-epaper-2.13inch-2.jpg', alt: 'T5 ePaper 2.13inch back view' },
+  { src: '/products/t5-series/t5-epaper-2.13inch/index/image/t5-epaper-2.13inch-3.jpg', alt: 'T5 ePaper 2.13inch dimensions' },
 ]" />
 
 ## Overview
@@ -94,8 +95,8 @@ LILYGO T5 ePaper 2.13inch is a compact ultra-low-power development board combini
 
 ## Schematic
 
-- [T5V2.3 Schematic PDF (GitHub)](https://github.com/Xinyuan-LilyGO/LilyGo-T5-Epaper-Series/blob/master/schematic/T5V2.3.pdf)
-- [T5V2.4 Schematic PDF (GitHub)](https://github.com/Xinyuan-LilyGO/LilyGo-T5-Epaper-Series/blob/master/schematic/T5V2.4.pdf)
+- [T5V2.3 Schematic PDF (GitHub)](https://github.com/Xinyuan-LilyGO/LilyGo-T5-Epaper-Series/blob/master/schematic/T5_2.13.pdf)
+- [T5V2.4 Schematic PDF (GitHub)](https://github.com/Xinyuan-LilyGO/LilyGo-T5-Epaper-Series/blob/master/schematic/T5_2.13.pdf)
 
 ## Datasheet
 

@@ -9,6 +9,7 @@ tags: ESP32-S3, Wi-Fi, Bluetooth, PSRAM, Qwiic, IoT, General Purpose
 <ImageGallery :columns="3" :images="[
   { src: '/products/t7-series/t7-s3/index/image/t7-s3-1.jpg', alt: 'T7-S3 正面图' },
   { src: '/products/t7-series/t7-s3/index/image/t7-s3-2.jpg', alt: 'T7-S3 背面图' },
+  { src: '/products/t7-series/t7-s3/index/image/t7-s3-3.jpg', alt: 'T7-S3 尺寸图' },
 ]" />
 
 ## 概述
@@ -50,9 +51,15 @@ LILYGO T7-S3 是基于 **ESP32-S3-WROOM-1** 的紧凑型通用开发板，具备
 | 扩展 | Qwiic / STEMMA QT（I2C） |
 | 尺寸 | 39 × 31 mm |
 
+![T7-S3 规格参数](/products/t7-series/t7-s3/index/image/t7-s3-info.jpg)
+
+## 引脚图
+
+![T7-S3 引脚图](/products/t7-series/t7-s3/index/image/t7-s3-pinout.jpg)
+
 ## 软件开发
 
-* [LilyGo-T7-S3 GitHub 仓库](https://github.com/Xinyuan-LilyGO/LilyGo-T7-S3)
+* [LilyGo-T7-S3 GitHub 仓库](https://github.com/Xinyuan-LilyGO/T7-S3)
 
 ## 版本历史
 

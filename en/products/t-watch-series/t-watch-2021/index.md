@@ -9,6 +9,7 @@ tags: ESP32, Smartwatch, AXP202, BMA423, TFT, Wi-Fi, Bluetooth, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-watch-series/t-watch-2021/index/image/t-watch-2021-1.jpg', alt: 'T-Watch 2021 front view' },
   { src: '/products/t-watch-series/t-watch-2021/index/image/t-watch-2021-2.jpg', alt: 'T-Watch 2021 back view' },
+  { src: '/products/t-watch-series/t-watch-2021/index/image/t-watch-2021-info.jpg', alt: 'T-Watch 2021 specifications' },
 ]" />
 
 ## Overview
@@ -88,6 +89,8 @@ LILYGO T-Watch 2021 is an open-source ESP32-based smart watch development platfo
 | Battery | 380 mAh LiPo |
 | USB | USB-C |
 
+![T-Watch 2021 Specifications](/products/t-watch-series/t-watch-2021/index/image/t-watch-2021-info.jpg)
+
 ## Pin Diagram
 
 ### Display (ST7789V)
@@ -126,9 +129,9 @@ LILYGO T-Watch 2021 is an open-source ESP32-based smart watch development platfo
 
 ## Datasheet
 
-- [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
-- [AXP202 Datasheet](http://www.x-powers.com/en.php/Info/product_detail/article_id/29)
-- [BMA423 Datasheet](https://www.bosch-sensortec.com/products/motion-sensors/accelerometers/bma423/)
+- [ESP32 Datasheet](/datasheet/esp32_datasheet_en.pdf)
+- [AXP202 Datasheet](/datasheet/AXP192%20Brief.pdf)
+- [BMA423 Datasheet](/datasheet/BMA423.PDF)
 
 ## Software Libraries
 

@@ -9,6 +9,8 @@ tags: ESP32-S3, 摄像头, OV2640, SIM, mPCIe, 蜂窝, 4G, IoT
 <ImageGallery :columns="3" :images="[
   { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-1.jpg', alt: 'T-SIMCam 正面' },
   { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-2.jpg', alt: 'T-SIMCam 背面' },
+  { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-3.jpg', alt: 'T-SIMCam 尺寸图' },
+  { src: '/products/t-sim-series/t-simcam/index/image/t-simcam-info.jpg', alt: 'T-SIMCam 规格参数' },
 ]" />
 
 ## 概述
@@ -21,7 +23,7 @@ LILYGO T-SIMCam 是一款集摄像头与蜂窝通信于一体的 ESP32-S3 IoT �
 
 | 示例 | PlatformIO/Arduino | ESP-IDF | 描述 |
 | :--: | :----------------: | :-----: | :--: |
-| [T-SIMCam](https://github.com/Xinyuan-LilyGO/T-SIMCam) | ✓ | | 摄像头采集、蜂窝上传、MQTT 示例 |
+| [T-SIMCam](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series) | ✓ | | 摄像头采集、蜂窝上传、MQTT 示例 |
 
 ### PlatformIO
 
@@ -88,6 +90,8 @@ LILYGO T-SIMCam 是一款集摄像头与蜂窝通信于一体的 ESP32-S3 IoT �
 | USB | 1 × USB-C |
 | 电池 | 3.7 V 锂电接口 |
 
+![T-SIMCam 规格参数](/products/t-sim-series/t-simcam/index/image/t-simcam-info.jpg)
+
 ## 引脚图
 
 ### 摄像头（OV2640，DVP）
@@ -118,16 +122,16 @@ LILYGO T-SIMCam 是一款集摄像头与蜂窝通信于一体的 ESP32-S3 IoT �
 
 ## 原理图
 
-- [T-SIMCam GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/T-SIMCam/tree/master/hardware)
+- [T-SIMCam GitHub 仓库（硬件）](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series/tree/master/schematic)
 
 ## 数据手册
 
-- [ESP32-S3 数据手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [OV2640 数据手册](https://www.ov.com/full/product/OV2640.html)
+- [ESP32-S3 数据手册](/datasheet/esp32-s3_datasheet_en.pdf)
+- [OV2640 数据手册](/datasheet/OV2640-DATASHEET.pdf)
 
 ## 软件库
 
-- [T-SIMCam GitHub 仓库](https://github.com/Xinyuan-LilyGO/T-SIMCam)
+- [T-SIMCam GitHub 仓库](https://github.com/Xinyuan-LilyGO/LilyGo-Camera-Series)
 
 ### 依赖库
 

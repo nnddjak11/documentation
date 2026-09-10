@@ -1,7 +1,7 @@
 ---
 title: LILYGO T-Deck Plus
 show_source: false
-tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard
+tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard, Touch
 ---
 
 # {{ $frontmatter.title }} <ShopLink href="https://lilygo.cc/products/t-deck" />
@@ -14,9 +14,12 @@ tags: ESP32-S3, LoRa, GPS, Trackball, Keyboard
 
 ## 概述
 
-LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 2.8 英寸 ST7789 LCD（320×240）、轨迹球导航模块、物理键盘（I²C）、SX1262 LoRa、MIA-M10Q GNSS、ES7210 麦克风阵列和 TF 卡，支持 2000mAh 锂电池供电。
+LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 2.8 英寸 ST7789 LCD（320×240）、GT911 电容触摸、轨迹球导航模块、物理键盘（I²C）、SX1262 LoRa、MIA-M10Q GNSS、ES7210 麦克风阵列和 TF 卡，支持 2000mAh 锂电池供电。
 
-> **注意：** T-Deck-Plus 的 Grove 接口引脚已分配给 GPS 模块，Grove 接口不可使用。T-Deck 版本无触摸屏，使用轨迹球导航代替。
+> **注意：**
+> 1. T-Deck-Plus 的 Grove 接口引脚已分配给 GPS 模块，Grove 接口不可使用。T-Deck Plus 具备 GT911 电容触摸屏；标准 T-Deck 版本无触摸屏，使用轨迹球导航代替。
+> 2. LoRa 无线电模块与其他外设共享 SPI 总线。一次只能选择一个 SPI 设备，因此请确保在与 SX1262 通信之前，所有其他 SPI 设备的 CS 线都处于高电平（非活动状态）。
+> 3. 使用电池供电时，**GPIO10 必须设置为高电平**。如果电路板通过 USB 供电，则可以忽略此要求。
 
 ## 快速开始
 
@@ -28,7 +31,7 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 | [Keyboard_T_Deck_Master](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/Keyboard_T_Deck_Master) | ✓ | 读取键盘输入 |
 | [Keyboard_ESP32C3](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/Keyboard_ESP32C3) | ✓ | ESP32-C3 键盘 I2C 从机 |
 | [Microphone](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/Microphone) | ✓ | 噪声检测示例 |
-| [Touchpad](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/Touchpad) | ✓ | 读取轨迹球坐标 |
+| [Touchpad](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/Touchpad) | ✓ | 读取触摸坐标 |
 | [GPSShield](https://github.com/Xinyuan-LilyGO/T-Deck/tree/master/examples/GPSShield) | ✓ | GPS 扩展板示例 |
 
 > 如果启用麦克风，板子中间的 BOOT 按键（GPIO0）将不可用。
@@ -77,7 +80,7 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 ## 主要特点
 
 - ESP32-S3FN16R8：16MB Flash，8MB OPI PSRAM，Wi-Fi + 蓝牙 5.0
-- 2.8 英寸 ST7789 LCD（320×240），轨迹球导航
+- 2.8 英寸 ST7789 LCD（320×240），GT911 电容触摸，轨迹球导航
 - SX1262 LoRa（433MHz~915MHz 可选），MIA-M10Q GNSS
 - ES7210 音频编解码器 + MSM381A3729H9CP 麦克风阵列
 - 2000mAh 锂聚合物电池，物理键盘（I²C），TF 卡
@@ -94,7 +97,8 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 | LoRa | SX1262（433MHz~915MHz 可选） |
 | GNSS | MIA-M10Q |
 | 屏幕 | 2.8 英寸 ST7789 LCD (320×240) |
-| 控制方式 | 轨迹球导航模块 |
+| 触摸 | GT911 电容触摸（I²C，INT=GPIO16） |
+| 控制方式 | 触摸屏 + 轨迹球导航模块 |
 | 输入 | 物理键盘（I²C） |
 | 音频 | ES7210 + MSM381A3729H9CP 麦克风阵列 |
 | 电池 | 2000mAh 锂聚合物电池 |
@@ -160,6 +164,196 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 #define BOARD_GPS_RX_PIN    44
 ```
 
+## 外设初始化代码
+
+以下代码片段展示了使用上述引脚定义初始化各外设的最小配置。将 [引脚映射](#引脚映射) 中的 `#define` 代码块复制到你的程序中，然后使用相应的初始化片段。
+
+> **所有 SPI 操作前** — 先将其他 CS 线拉高：
+> ```cpp
+> digitalWrite(BOARD_SDCARD_CS, HIGH);
+> digitalWrite(BOARD_TFT_CS,    HIGH);
+> digitalWrite(RADIO_CS_PIN,    HIGH);
+> ```
+
+### 电源使能（电池供电时必须）
+
+```cpp
+// 电池供电时必须设为 HIGH；USB 供电时调用也无害
+pinMode(BOARD_POWERON, OUTPUT);
+digitalWrite(BOARD_POWERON, HIGH);
+```
+
+### 屏幕（ST7789 — Arduino_GFX）
+
+```cpp
+#include <Arduino_GFX_Library.h>
+
+Arduino_DataBus *bus = new Arduino_ESP32SPI(
+    BOARD_TFT_DC, BOARD_TFT_CS,
+    BOARD_SPI_SCK, BOARD_SPI_MOSI, BOARD_SPI_MISO);
+
+Arduino_GFX *gfx = new Arduino_ST7789(bus, -1, 0, true, 320, 240);
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    gfx->begin();
+    gfx->fillScreen(BLACK);
+}
+```
+
+### 屏幕（ST7789 — TFT_eSPI）
+
+> 需要为 T-Deck 配置 `User_Setup.h` — 参考 [2024-07-26 提交](https://github.com/Xinyuan-LilyGO/T-Deck/commit/6adb8884c689f174c29a6d7172a0daa367a582eb) 获取正确的初始化序列。
+
+```cpp
+#include <TFT_eSPI.h>
+
+TFT_eSPI tft;
+
+void setup() {
+    pinMode(BOARD_TFT_BACKLIGHT, OUTPUT);
+    digitalWrite(BOARD_TFT_BACKLIGHT, HIGH);
+    tft.init();
+    tft.setRotation(1);
+    tft.fillScreen(TFT_BLACK);
+}
+```
+
+### LoRa（SX1262 — RadioLib）
+
+```cpp
+#include <SPI.h>
+#include <RadioLib.h>
+
+SX1262 radio = new Module(
+    RADIO_CS_PIN,   // CS
+    RADIO_DIO1_PIN, // DIO1 / IRQ
+    RADIO_RST_PIN,  // RST
+    RADIO_BUSY_PIN  // BUSY
+);
+
+void setup() {
+    pinMode(BOARD_POWERON, OUTPUT); digitalWrite(BOARD_POWERON, HIGH);
+    delay(200);
+
+    pinMode(BOARD_SDCARD_CS, OUTPUT); digitalWrite(BOARD_SDCARD_CS, HIGH);
+    pinMode(BOARD_TFT_CS,    OUTPUT); digitalWrite(BOARD_TFT_CS,    HIGH);
+    pinMode(RADIO_CS_PIN,    OUTPUT); digitalWrite(RADIO_CS_PIN,    HIGH);
+
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI, RADIO_CS_PIN);
+
+    // frequency (MHz), bandwidth (kHz), spreading factor, coding rate, sync word, output power (dBm)
+    int state = radio.begin(915.0, 125.0, 7, 5, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 22);
+    if (state != RADIOLIB_ERR_NONE) {
+        Serial.printf("LoRa 初始化失败: %d\n", state);
+    }
+}
+```
+
+### GPS（MIA-M10Q — TinyGPSPlus）
+
+> 仅 T-Deck Plus 具备。Grove 接口引脚已分配给 GPS 模块，Grove 接口不可作为通用接口使用。
+
+```cpp
+#include <TinyGPSPlus.h>
+
+TinyGPSPlus gps;
+
+void setup() {
+    // GPS 通过 UART 通信（ESP32-S3 上使用 Serial1）
+    Serial1.begin(9600, SERIAL_8N1, BOARD_GPS_TX_PIN, BOARD_GPS_RX_PIN);
+}
+
+void loop() {
+    while (Serial1.available()) {
+        gps.encode(Serial1.read());
+    }
+    if (gps.location.isUpdated()) {
+        Serial.printf("纬度: %.6f  经度: %.6f\n",
+            gps.location.lat(), gps.location.lng());
+    }
+}
+```
+
+### 键盘（I²C）
+
+```cpp
+#include <Wire.h>
+
+#define KEYBOARD_ADDR 0x55
+
+void setup() {
+    Wire.begin(BOARD_I2C_SDA, BOARD_I2C_SCL);
+    pinMode(BOARD_KEYBOARD_INT, INPUT_PULLUP);
+}
+
+void loop() {
+    if (digitalRead(BOARD_KEYBOARD_INT) == LOW) {
+        Wire.requestFrom(KEYBOARD_ADDR, 1);
+        if (Wire.available()) {
+            char key = Wire.read();
+            Serial.printf("按键: %c\n", key);
+        }
+    }
+}
+```
+
+### 轨迹球
+
+```cpp
+void setup() {
+    pinMode(BOARD_TBOX_G01, INPUT);
+    pinMode(BOARD_TBOX_G02, INPUT);
+    pinMode(BOARD_TBOX_G03, INPUT);
+    pinMode(BOARD_TBOX_G04, INPUT);
+}
+```
+
+### 麦克风（ES7210 — I²S）
+
+> 启用麦克风后，**GPIO0（BOOT / 轨迹球中间按键）不可用**。
+
+```cpp
+#include <driver/i2s.h>
+
+void setup() {
+    i2s_config_t i2s_config = {
+        .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),
+        .sample_rate = 16000,
+        .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
+        .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
+        .communication_format = I2S_COMM_FORMAT_STAND_I2S,
+        .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
+        .dma_buf_count = 4,
+        .dma_buf_len = 256,
+        .use_apll = false,
+    };
+    i2s_pin_config_t pin_config = {
+        .mck_io_num   = BOARD_ES7210_MCLK,
+        .bck_io_num   = BOARD_ES7210_SCK,
+        .ws_io_num    = BOARD_ES7210_LRCK,
+        .data_in_num  = BOARD_ES7210_DIN,
+        .data_out_num = I2S_PIN_NO_CHANGE,
+    };
+    i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
+    i2s_set_pin(I2S_NUM_0, &pin_config);
+}
+```
+
+### SD 卡（SPI）
+
+```cpp
+#include <SD.h>
+
+void setup() {
+    SPI.begin(BOARD_SPI_SCK, BOARD_SPI_MISO, BOARD_SPI_MOSI);
+    if (!SD.begin(BOARD_SDCARD_CS)) {
+        Serial.println("SD 卡初始化失败");
+    }
+}
+```
+
 ## 尺寸图
 
 ## 原理图
@@ -168,9 +362,9 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 
 ## 数据手册
 
-* [ESP32-S3 Datasheet](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-* [T-Deck ANT 868-915MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20868-915MHZ.pdf.pdf)
-* [T-Deck ANT 433MHz](https://github.com/Xinyuan-LilyGO/T-Deck/blob/master/datasheet/T-Deck%20ANT%20433MHZ.pdf)
+* [ESP32-S3 Datasheet](/datasheet/esp32-s3_datasheet_en.pdf)
+* [T-Deck ANT 868-915MHz](/datasheet/T-Deck%20ANT%20868-915MHZ.pdf)
+* [T-Deck ANT 433MHz](/datasheet/T-Deck%20ANT%20433MHZ.pdf)
 
 ## 软件开发
 
@@ -191,13 +385,21 @@ LILYGO T-Deck Plus 是 T-Deck 的升级版本，基于 ESP32-S3 主控，搭载 
 ## 常见问题
 
 * **Q. T-Deck Plus 是否有触摸屏功能？**  
-  A. T-Deck Plus 没有触摸屏，使用轨迹球导航模块替代触摸操作。
+  A. 有。T-Deck Plus 配备 GT911 电容触摸屏，同时保留轨迹球导航模块。标准 T-Deck 版本没有触摸屏。
 
 * **Q. Grove 接口可以使用吗？**  
   A. T-Deck-Plus 的 Grove 接口引脚已分配给 GPS 模块，Grove 接口不可使用。
 
 * **Q. 为什么板子一直烧录失败？**  
   A. 按住轨迹球中间按键（BOOT），然后插入 USB，此时芯片进入下载模式，再点击上传。上传完成后按 RST 键退出下载模式。
+
+* **Q. LoRa 初始化出现 `Radio init failed: -2` 怎么办？**  
+  A. 该错误通常表示程序没有检测到 SX1262。请确认初始化 LoRa 前已将 GPIO10 设为 HIGH，并将其他 SPI 设备的 CS 脚拉高，例如 TFT_CS=12、SD_CS=39。还需要确认代码使用 T-Deck Plus 的 LoRa 引脚：CS=9、DIO1=45、RST=17、BUSY=13。
+
+* **Q. 如何判断 T-Deck Plus 是否正在充电或已经充满？**  
+  A. 连接 USB 后，可以从设备底部观察蓝色充电指示灯。蓝灯亮起表示正在充电；蓝灯熄灭表示电池已充满。通过这种方式可以确认设备是否能够正常充满。
+
+  ![T-Deck Plus 底部蓝色充电指示灯位置](/products/t-deck-series/t-deck-plus/index/image/t-deck-plus-charging-led.jpg)
 
 * **Q. 为什么 Arduino IDE 提示升级库文件？**  
   A. 建议不升级，不同版本的库文件可能不兼容。
